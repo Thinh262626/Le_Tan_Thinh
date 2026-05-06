@@ -181,78 +181,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 /* FOOTER */
 .footer{display:flex;justify-content:space-between;align-items:center;padding:20px 28px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);backdrop-filter:blur(16px);margin-top:28px}
 .footer p{font-size:12px;color:var(--muted)}
-.footer-actions{display:flex;gap:10px;align-items:center}
 .footer-btn{display:inline-flex;align-items:center;background:linear-gradient(135deg,var(--gold),var(--bronze));color:#0C0C0F;text-decoration:none;padding:10px 24px;border-radius:100px;font-size:13px;font-weight:700;transition:all .25s;box-shadow:0 4px 20px rgba(201,169,110,.25)}
 .footer-btn:hover{transform:translateY(-2px) scale(1.04);box-shadow:0 8px 32px rgba(201,169,110,.4)}
-.footer-btn-outline{display:inline-flex;align-items:center;background:transparent;border:1px solid rgba(201,169,110,.3);color:var(--gold);text-decoration:none;padding:10px 20px;border-radius:100px;font-size:13px;font-weight:600;transition:all .25s}
-.footer-btn-outline:hover{background:rgba(201,169,110,.06);transform:translateY(-2px)}
-
-/* ===== INTRO LOADER ===== */
-.intro-loader{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;align-items:center;justify-content:center;transition:opacity .6s ease,visibility .6s ease}
-.intro-loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
-.intro-inner{text-align:center}
-.intro-name-label{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;letter-spacing:.4em;color:var(--muted);margin-bottom:8px;opacity:0;animation:fadeUp .6s .3s forwards}
-.intro-name{font-family:'Syne',sans-serif;font-size:clamp(56px,12vw,110px);font-weight:800;line-height:.9;background:linear-gradient(140deg,#fff 20%,var(--gold) 60%,var(--bronze) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;opacity:0;animation:fadeUp .6s .5s forwards}
-.intro-line{width:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:20px auto;animation:expandLine .8s .9s forwards}
-.intro-role{font-size:13px;font-weight:500;color:var(--muted);letter-spacing:.1em;opacity:0;animation:fadeUp .5s 1.1s forwards}
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-@keyframes expandLine{from{width:0}to{width:200px}}
-
-/* ===== SCROLL PROGRESS ===== */
-.scroll-progress{position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(90deg,var(--gold),var(--sage));z-index:10000;transition:width .1s linear}
-
-/* ===== NAV ===== */
-.nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:64px;background:rgba(12,12,15,.7);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.05);transform:translateY(-100%);transition:transform .4s cubic-bezier(.22,1,.36,1)}
-.nav.visible{transform:translateY(0)}
-.nav-logo{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:#fff;text-decoration:none;letter-spacing:-.01em}
-.nav-logo span{color:var(--gold)}
-.nav-links{display:flex;gap:6px;list-style:none}
-.nav-link{font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--muted);text-decoration:none;padding:6px 12px;border-radius:8px;transition:all .2s}
-.nav-link:hover,.nav-link.active{color:var(--gold);background:rgba(201,169,110,.08)}
-.nav-cta{font-size:12px;font-weight:700;color:#0C0C0F;background:linear-gradient(135deg,var(--gold),var(--bronze));text-decoration:none;padding:8px 18px;border-radius:100px;transition:all .25s}
-.nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(201,169,110,.3)}
-
-/* ===== BACK TO TOP ===== */
-.back-top{position:fixed;bottom:32px;right:32px;z-index:999;width:44px;height:44px;background:rgba(201,169,110,.1);border:1px solid rgba(201,169,110,.25);border-radius:12px;color:var(--gold);font-size:18px;cursor:pointer;backdrop-filter:blur(12px);transition:all .3s;opacity:0;transform:translateY(20px);pointer-events:none}
-.back-top.visible{opacity:1;transform:translateY(0);pointer-events:auto}
-.back-top:hover{background:rgba(201,169,110,.2);transform:translateY(-3px)}
-
-/* ===== SERVICES ===== */
-.bento-services{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px}
-.service-card{padding:32px;position:relative;overflow:hidden;transition:all .3s}
-.service-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,169,110,.03),transparent);opacity:0;transition:opacity .3s}
-.service-card:hover::before{opacity:1}
-.service-card:hover{transform:translateY(-6px);border-color:rgba(201,169,110,.2)}
-.svc-icon{width:52px;height:52px;background:linear-gradient(135deg,rgba(201,169,110,.1),rgba(122,139,126,.08));border:1px solid rgba(201,169,110,.15);border-radius:14px;display:flex;align-items:center;justify-content:center;color:var(--gold);margin-bottom:20px}
-.svc-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:10px}
-.svc-desc{font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:16px}
-.svc-list{list-style:none;display:flex;flex-direction:column;gap:6px}
-.svc-list li{font-size:12px;font-weight:500;color:#666;padding-left:14px;position:relative}
-.svc-list li::before{content:'—';position:absolute;left:0;color:var(--gold);font-size:10px}
-
-/* ===== TESTIMONIALS ===== */
-.bento-testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px}
-.testimonial-card{padding:28px;position:relative}
-.testi-quote{font-family:'Syne',sans-serif;font-size:64px;font-weight:800;line-height:.7;color:var(--gold);opacity:.2;margin-bottom:12px;display:block}
-.testi-text{font-size:14px;color:#777;line-height:1.85;margin-bottom:20px;font-style:italic}
-.testi-author{display:flex;align-items:center;gap:12px}
-.testi-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,rgba(201,169,110,.2),rgba(122,139,126,.2));border:1px solid rgba(201,169,110,.2);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:var(--gold);flex-shrink:0}
-.testi-name{display:block;font-size:13px;font-weight:600;color:#ccc}
-.testi-role{display:block;font-size:11px;color:var(--muted);margin-top:2px}
-
-/* ===== RESPONSIVE UPDATES ===== */
-@media(max-width:1000px){
-  .nav{padding:0 20px}.nav-links{display:none}
-  .bento-services,.bento-testimonials{grid-template-columns:1fr 1fr}
-}
-@media(max-width:700px){
-  .wrapper{padding:84px 12px 60px}
-  .bento-services,.bento-testimonials{grid-template-columns:1fr}
-  .nav-cta{display:none}
-  .footer{flex-direction:column;gap:14px;text-align:center}
-  .footer-actions{flex-direction:column;width:100%}
-  .footer-btn,.footer-btn-outline{justify-content:center}
-}
 
 /* RESPONSIVE */
 @media(max-width:1000px){
