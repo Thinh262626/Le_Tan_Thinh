@@ -342,5 +342,9 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 /* ===== NAME SCRAMBLE ===== */
 .name-main{cursor:default}
 
-/* ===== SCRAMBLE CHAR — prevent layout jump ===== */
-.sc-char{display:inline;white-space:pre}
+/* ===== NAME REVEAL ANIMATION ===== */
+.name-main{animation:nameReveal 1s cubic-bezier(.22,1,.36,1) 2s both}
+@keyframes nameReveal{
+  from{opacity:0;transform:translateY(24px) skewX(-4deg);filter:blur(6px)}
+  to{opacity:1;transform:translateY(0) skewX(0);filter:blur(0)}
+}
