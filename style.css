@@ -313,3 +313,31 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
   .nav-cta{display:none}
   .stats-strip{padding:20px}
 }
+
+/* ===== CUSTOM SCROLLBAR ===== */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--gold),var(--bronze));border-radius:10px}
+::-webkit-scrollbar-thumb:hover{background:var(--gold)}
+
+/* ===== FLOATING CONTACT ===== */
+.float-contact{position:fixed;bottom:90px;right:32px;z-index:998;display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--gold),var(--bronze));color:#0C0C0F;text-decoration:none;padding:12px 18px;border-radius:100px;font-size:12px;font-weight:700;box-shadow:0 4px 24px rgba(201,169,110,.35);opacity:0;transform:translateY(20px) scale(.9);transition:all .35s cubic-bezier(.22,1,.36,1);pointer-events:none}
+.float-contact.visible{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.float-contact:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 8px 36px rgba(201,169,110,.5)}
+.float-contact::before{content:'';position:absolute;inset:-3px;border-radius:100px;background:linear-gradient(135deg,var(--gold),var(--sage));z-index:-1;opacity:0;animation:float-pulse 2.5s ease-in-out infinite}
+.float-contact.visible::before{opacity:.4}
+@keyframes float-pulse{0%,100%{transform:scale(1);opacity:.4}50%{transform:scale(1.15);opacity:0}}
+
+/* ===== SPLIT TEXT ===== */
+.split-text .word{display:inline-block;overflow:hidden}
+.split-text .char{display:inline-block;transform:translateY(110%);transition:transform .55s cubic-bezier(.22,1,.36,1)}
+.split-text.visible .char{transform:translateY(0)}
+
+/* ===== SECTION LINE NUMBERED ===== */
+.section-line span{font-size:11px;letter-spacing:.2em}
+
+/* ===== PARALLAX ORBS ===== */
+.orb{will-change:transform}
+
+/* ===== NAME SCRAMBLE ===== */
+.name-main{cursor:default}

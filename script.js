@@ -135,3 +135,48 @@ document.querySelectorAll('.service-card .svc-icon, .nav-cta, .footer-btn').forE
     setTimeout(() => el.style.transition = '', 400);
   });
 });
+
+// ===== TEXT SCRAMBLE (name THỊNH) =====
+const scrambleEl = document.querySelector('.name-main');
+const original = scrambleEl ? scrambleEl.textContent : '';
+const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%&*';
+function scramble(el, text, duration = 1200) {
+  let frame = 0; const totalFrames = Math.round(duration / 30);
+  const timer = setInterval(() => {
+    el.textContent = text.split('').map((c, i) => {
+      if (frame / totalFrames > i / text.length) return c;
+      return c === ' ' ? ' ' : chars[Math.floor(Math.random() * chars.length)];
+    }).join('');
+    if (frame++ >= totalFrames) { el.textContent = text; clearInterval(timer); }
+  }, 30);
+}
+if (scrambleEl) {
+  setTimeout(() => scramble(scrambleEl, original), 1900);
+  scrambleEl.addEventListener('mouseenter', () => scramble(scrambleEl, original, 800));
+}
+
+// ===== SPLIT TEXT REVEAL =====
+document.querySelectorAll('.split-text').forEach(el => {
+  const words = el.innerHTML.split(' ');
+  el.innerHTML = words.map(w => `<span class="word">${w.split('').map(c => `<span class="char">${c}</span>`).join('')}</span>`).join(' ');
+  const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { el.classList.add('visible'); obs.unobserve(el); }}, {threshold:.3});
+  obs.observe(el);
+});
+
+// ===== PARALLAX ORBS =====
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  const orb1 = document.querySelector('.orb1');
+  const orb2 = document.querySelector('.orb2');
+  const orb3 = document.querySelector('.orb3');
+  if (orb1) orb1.style.transform = `translate(0, ${y * 0.12}px)`;
+  if (orb2) orb2.style.transform = `translate(0, ${-y * 0.08}px)`;
+  if (orb3) orb3.style.transform = `translate(0, ${y * 0.06}px)`;
+}, { passive: true });
+
+// ===== FLOATING CONTACT =====
+const floatContact = document.getElementById('float-contact');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 300) floatContact.classList.add('visible');
+  else floatContact.classList.remove('visible');
+}, { passive: true });
