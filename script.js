@@ -6,6 +6,18 @@ window.addEventListener('load', () => {
   }, 1800);
 });
 
+// ===== HAMBURGER MENU =====
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+const mobileOverlay = document.getElementById('mobile-overlay');
+const mobileClose = document.getElementById('mobile-close');
+function openMenu() { hamburger.classList.add('open'); mobileMenu.classList.add('open'); mobileOverlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeMenu() { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); mobileOverlay.classList.remove('open'); document.body.style.overflow = ''; }
+hamburger.addEventListener('click', openMenu);
+mobileClose.addEventListener('click', closeMenu);
+mobileOverlay.addEventListener('click', closeMenu);
+document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', closeMenu));
+
 // ===== CURSOR GLOW =====
 const cg = document.getElementById('cursor-glow');
 document.addEventListener('mousemove', e => { cg.style.left = e.clientX + 'px'; cg.style.top = e.clientY + 'px'; });
@@ -98,7 +110,7 @@ const sro = new IntersectionObserver(entries => {
 }, { threshold: 0.4 });
 document.querySelectorAll('.stats-grid').forEach(el => sro.observe(el));
 
-// ===== CARD TILT =====
+// ===== CARD TILT (standard cards) =====
 document.querySelectorAll('.card').forEach(c => {
   c.addEventListener('mousemove', e => {
     const r = c.getBoundingClientRect();
@@ -107,4 +119,19 @@ document.querySelectorAll('.card').forEach(c => {
     c.style.transform = `perspective(800px) rotateY(${x * 3}deg) rotateX(${-y * 3}deg) translateZ(4px)`;
   });
   c.addEventListener('mouseleave', () => c.style.transform = '');
+});
+
+// ===== MAGNETIC EFFECT (service cards) =====
+document.querySelectorAll('.service-card .svc-icon, .nav-cta, .footer-btn').forEach(el => {
+  el.addEventListener('mousemove', e => {
+    const r = el.getBoundingClientRect();
+    const dx = e.clientX - (r.left + r.width / 2);
+    const dy = e.clientY - (r.top + r.height / 2);
+    el.style.transform = `translate(${dx * 0.25}px, ${dy * 0.25}px) scale(1.08)`;
+  });
+  el.addEventListener('mouseleave', () => {
+    el.style.transform = '';
+    el.style.transition = 'transform .4s cubic-bezier(.22,1,.36,1)';
+    setTimeout(() => el.style.transition = '', 400);
+  });
 });
