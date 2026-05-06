@@ -341,3 +341,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 
 /* ===== NAME SCRAMBLE ===== */
 .name-main{cursor:default}
+
+/* ===== SCRAMBLE CHAR — prevent layout jump ===== */
+.sc-char{display:inline-block;min-width:.58em;text-align:center}

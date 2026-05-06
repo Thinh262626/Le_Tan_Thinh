@@ -136,23 +136,41 @@ document.querySelectorAll('.service-card .svc-icon, .nav-cta, .footer-btn').forE
   });
 });
 
-// ===== TEXT SCRAMBLE (name THỊNH) =====
+// ===== TEXT SCRAMBLE — FIXED (no layout jump) =====
 const scrambleEl = document.querySelector('.name-main');
-const original = scrambleEl ? scrambleEl.textContent : '';
-const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%&*';
-function scramble(el, text, duration = 1200) {
-  let frame = 0; const totalFrames = Math.round(duration / 30);
-  const timer = setInterval(() => {
-    el.textContent = text.split('').map((c, i) => {
-      if (frame / totalFrames > i / text.length) return c;
-      return c === ' ' ? ' ' : chars[Math.floor(Math.random() * chars.length)];
-    }).join('');
-    if (frame++ >= totalFrames) { el.textContent = text; clearInterval(timer); }
-  }, 30);
-}
 if (scrambleEl) {
-  setTimeout(() => scramble(scrambleEl, original), 1900);
-  scrambleEl.addEventListener('mouseenter', () => scramble(scrambleEl, original, 800));
+  const original = scrambleEl.textContent.trim();
+  const safeChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+  // Wrap each char in a fixed-width inline-block span
+  scrambleEl.innerHTML = original.split('').map(c =>
+    `<span class="sc-char">${c}</span>`
+  ).join('');
+
+  function scramble(duration = 1000) {
+    const spans = scrambleEl.querySelectorAll('.sc-char');
+    original.split('').forEach((origChar, i) => {
+      const span = spans[i];
+      if (!span) return;
+      let frame = 0;
+      const totalFrames = Math.round((duration - i * 60) / 35);
+      setTimeout(() => {
+        const timer = setInterval(() => {
+          if (frame >= totalFrames) {
+            span.textContent = origChar;
+            clearInterval(timer);
+          } else {
+            span.textContent = origChar === ' ' ? ' '
+              : safeChars[Math.floor(Math.random() * safeChars.length)];
+            frame++;
+          }
+        }, 35);
+      }, i * 60);
+    });
+  }
+
+  setTimeout(() => scramble(1100), 1950);
+  scrambleEl.addEventListener('mouseenter', () => scramble(700));
 }
 
 // ===== SPLIT TEXT REVEAL =====
