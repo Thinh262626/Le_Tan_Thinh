@@ -124,7 +124,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .kol-list{display:flex;flex-direction:column;gap:8px}
 .kol-item{display:flex;align-items:center;gap:12px;background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:10px 14px;transition:transform .2s}
 .kol-item:hover{transform:translateX(4px)}
-.kol-av{width:34px;height:34px;background:linear-gradient(135deg,rgba(201,169,110,.15),rgba(122,139,126,.15));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.kol-av{width:34px;height:34px;background:linear-gradient(135deg,rgba(201,169,110,.15),rgba(122,139,126,.15));border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:var(--gold);flex-shrink:0}
 .kol-name{display:block;font-size:13px;font-weight:600;color:#ccc}
 .kol-count{display:block;font-size:11px;color:var(--muted)}
 
