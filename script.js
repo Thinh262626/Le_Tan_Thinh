@@ -138,14 +138,6 @@ document.querySelectorAll('.service-card .svc-icon, .nav-cta, .footer-btn').forE
 
 
 
-// ===== SPLIT TEXT REVEAL =====
-document.querySelectorAll('.split-text').forEach(el => {
-  const words = el.innerHTML.split(' ');
-  el.innerHTML = words.map(w => `<span class="word">${w.split('').map(c => `<span class="char">${c}</span>`).join('')}</span>`).join(' ');
-  const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { el.classList.add('visible'); obs.unobserve(el); }}, {threshold:.3});
-  obs.observe(el);
-});
-
 // ===== PARALLAX ORBS =====
 window.addEventListener('scroll', () => {
   const y = window.scrollY;

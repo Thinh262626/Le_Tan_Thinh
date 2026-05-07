@@ -328,11 +328,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .float-contact.visible::before{opacity:.4}
 @keyframes float-pulse{0%,100%{transform:scale(1);opacity:.4}50%{transform:scale(1.15);opacity:0}}
 
-/* ===== SPLIT TEXT ===== */
-.split-text .word{display:inline-block;overflow:hidden}
-.split-text .char{display:inline-block;transform:translateY(110%);transition:transform .55s cubic-bezier(.22,1,.36,1)}
-.split-text.visible .char{transform:translateY(0)}
-
 /* ===== SECTION LINE NUMBERED ===== */
 .section-line span{font-size:11px;letter-spacing:.2em}
 
