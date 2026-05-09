@@ -71,8 +71,13 @@ const ro = new IntersectionObserver(entries => {
       ro.unobserve(e.target);
     }
   });
-}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-document.querySelectorAll('.reveal').forEach((el, i) => { el.dataset.d = (i % 6) * 70; ro.observe(el); });
+}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach((el) => { 
+  // Stagger effect based on index in parent
+  const idx = Array.from(el.parentElement.children).indexOf(el);
+  el.dataset.d = (idx >= 0 ? idx : 0) * 80; 
+  ro.observe(el); 
+});
 
 // ===== SKILL BARS =====
 const so = new IntersectionObserver(entries => {
@@ -110,16 +115,35 @@ const sro = new IntersectionObserver(entries => {
 }, { threshold: 0.4 });
 document.querySelectorAll('.stats-grid').forEach(el => sro.observe(el));
 
-// ===== CARD TILT (standard cards) =====
-document.querySelectorAll('.card').forEach(c => {
-  c.addEventListener('mousemove', e => {
-    const r = c.getBoundingClientRect();
-    const x = (e.clientX - r.left) / r.width - .5;
-    const y = (e.clientY - r.top) / r.height - .5;
-    c.style.transform = `perspective(800px) rotateY(${x * 3}deg) rotateX(${-y * 3}deg) translateZ(4px)`;
+// ===== CARD TILT (VanillaTilt) =====
+if (typeof VanillaTilt !== 'undefined') {
+  VanillaTilt.init(document.querySelectorAll(".card"), {
+      max: 8,
+      speed: 400,
+      glare: true,
+      "max-glare": 0.15,
+      perspective: 1000
   });
-  c.addEventListener('mouseleave', () => c.style.transform = '');
-});
+}
+
+// ===== 3D TECH SPHERE (TagCloud) =====
+const skillsContainer = document.getElementById('skills-sphere');
+if (skillsContainer && typeof TagCloud !== 'undefined') {
+    const mySkills = [
+        'Marketing', 'Branding', 'TikTok',
+        'Sales', 'Content', 'Strategy',
+        'Leadership', 'Analytics', 'B2B', 'B2C'
+    ];
+    TagCloud(skillsContainer, mySkills, {
+        radius: 130, maxSpeed: 'fast', initSpeed: 'normal', direction: 225, keep: true
+    });
+}
+
+// ===== PROJECT ACCORDION =====
+window.activateProject = function(el) {
+    document.querySelectorAll('.proj-acc-item').forEach(item => item.classList.remove('active'));
+    el.classList.add('active');
+};
 
 // ===== MAGNETIC EFFECT (service cards) =====
 document.querySelectorAll('.service-card .svc-icon, .nav-cta, .footer-btn').forEach(el => {
