@@ -18,11 +18,50 @@ mobileClose.addEventListener('click', closeMenu);
 mobileOverlay.addEventListener('click', closeMenu);
 document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', closeMenu));
 
-// ===== CURSOR GLOW =====
+// ===== CURSOR GLOW (ambient) =====
 const cg = document.getElementById('cursor-glow');
 document.addEventListener('mousemove', e => { cg.style.left = e.clientX + 'px'; cg.style.top = e.clientY + 'px'; });
 document.addEventListener('mouseleave', () => cg.style.opacity = '0');
 document.addEventListener('mouseenter', () => cg.style.opacity = '1');
+
+// ===== CUSTOM CURSOR (dot + ring) =====
+(function() {
+  const dot  = document.getElementById('cursor-dot');
+  const ring = document.getElementById('cursor-ring');
+  if (!dot || !ring || window.matchMedia('(pointer:coarse)').matches) return;
+
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px';
+    dot.style.top  = my + 'px';
+  });
+
+  // Smooth ring follows with lerp
+  (function lerpRing() {
+    rx += (mx - rx) * 0.11;
+    ry += (my - ry) * 0.11;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(lerpRing);
+  })();
+
+  // Hover expand
+  const targets = 'a,button,[onclick],.card,.tech-ball-wrap,.video-slot,.proj-acc-item,.service-card,.stat-cell,.hl-cell';
+  document.querySelectorAll(targets).forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('cur-hover'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('cur-hover'));
+  });
+
+  // Click pulse
+  document.addEventListener('mousedown', () => document.body.classList.add('cur-click'));
+  document.addEventListener('mouseup',   () => document.body.classList.remove('cur-click'));
+
+  // Hide when leaving window
+  document.addEventListener('mouseleave', () => { dot.style.opacity = '0'; ring.style.opacity = '0'; });
+  document.addEventListener('mouseenter', () => { dot.style.opacity = '1'; ring.style.opacity = '1'; });
+})();
 
 // ===== SCROLL PROGRESS =====
 const progress = document.getElementById('scroll-progress');
@@ -131,8 +170,9 @@ const skillsContainer = document.getElementById('skills-sphere');
 if (skillsContainer && typeof TagCloud !== 'undefined') {
     const mySkills = [
         'Marketing', 'Branding', 'TikTok',
-        'Sales', 'Content', 'Strategy',
-        'Leadership', 'Analytics', 'B2B', 'B2C'
+        'Sales', 'AIGC', 'AI · n8n',
+        'Leadership', 'KOL Mgmt', 'ISO 9001',
+        'Luxury', 'Analytics', 'MBA', 'Strategy', 'Content'
     ];
     TagCloud(skillsContainer, mySkills, {
         radius: 130, maxSpeed: 'fast', initSpeed: 'normal', direction: 225, keep: true
@@ -179,3 +219,36 @@ window.addEventListener('scroll', () => {
   if (window.scrollY > 300) floatContact.classList.add('visible');
   else floatContact.classList.remove('visible');
 }, { passive: true });
+
+// ===== TYPEWRITER =====
+(function() {
+  const roles = [
+    'Marketing & Brand Strategist',
+    'TikTok Content Ecosystem Builder',
+    'AI Automation Consultant',
+    'Luxury Brand Specialist',
+    'Sales Lead · 6 tỷ VND Revenue',
+    'Content Creator · 200M+ Views',
+  ];
+  const el = document.getElementById('typewriter-role');
+  if (!el) return;
+  let ri = 0, ci = 0, deleting = false;
+
+  function tick() {
+    const word = roles[ri];
+    el.textContent = deleting ? word.slice(0, ci--) : word.slice(0, ci++);
+
+    if (!deleting && ci > word.length) {
+      deleting = true;
+      setTimeout(tick, 2200);
+    } else if (deleting && ci < 0) {
+      deleting = false;
+      ri = (ri + 1) % roles.length;
+      setTimeout(tick, 420);
+    } else {
+      setTimeout(tick, deleting ? 36 : 68);
+    }
+  }
+  // Bắt đầu sau khi intro loader biến mất
+  setTimeout(tick, 2000);
+})();

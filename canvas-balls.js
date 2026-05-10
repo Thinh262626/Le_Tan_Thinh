@@ -1,14 +1,21 @@
+// Tools relevant to CV: Content Production, AI/Automation, Design, Marketing
 const techIcons = [
-    'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg',
-    'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg',
-    'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg',
-    'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/photoshop/photoshop-original.svg',
+    // Content Production
     'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/premierepro/premierepro-original.svg',
     'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/aftereffects/aftereffects-original.svg',
-    'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/canva/canva-original.svg',
-    'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg',
+    'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/photoshop/photoshop-original.svg',
+    'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/illustrator/illustrator-plain.svg',
+    'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/blender/blender-original.svg',
+    // Design & Web
     'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg',
-    'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/facebook/facebook-original.svg'
+    'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/canva/canva-original.svg',
+    'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/wordpress/wordpress-original.svg',
+    // AI & Automation
+    'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg',
+    // Analytics
+    'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg',
+    // Social & Marketing
+    'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/facebook/facebook-original.svg',
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -20,8 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
         container.style.width = '112px';
         container.style.height = '112px';
         container.style.cursor = 'grab';
-        
-        // Add shadow under ball like in template
+
         const shadow = document.createElement('div');
         shadow.style.width = '60px';
         shadow.style.height = '10px';
@@ -35,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
         wrap.style.display = 'flex';
         wrap.style.flexDirection = 'column';
         wrap.style.alignItems = 'center';
-        
+
         wrap.appendChild(container);
         wrap.appendChild(shadow);
         wrapper.appendChild(wrap);
@@ -51,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const controls = new THREE.OrbitControls(camera, renderer.domElement);
         controls.enableZoom = false;
         controls.enablePan = false;
-        
+
         controls.addEventListener('start', () => { container.style.cursor = 'grabbing'; });
         controls.addEventListener('end', () => { container.style.cursor = 'grab'; });
 
@@ -76,21 +82,19 @@ document.addEventListener("DOMContentLoaded", () => {
         group.add(mesh);
 
         const textureLoader = new THREE.TextureLoader();
-        
+
         fetch(iconUrl)
             .then(res => res.text())
             .then(svgText => {
-                // Strip existing width/height to avoid conflicts
                 svgText = svgText.replace(/width="[^"]*"/g, '').replace(/height="[^"]*"/g, '');
-                // Inject explicit pixel dimensions for WebGL
                 svgText = svgText.replace('<svg ', '<svg width="256" height="256" ');
-                
+
                 const base64 = btoa(unescape(encodeURIComponent(svgText)));
                 const dataUrl = `data:image/svg+xml;base64,${base64}`;
-                
+
                 textureLoader.load(dataUrl, (texture) => {
                     texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
-                    
+
                     const decalMaterial = new THREE.MeshStandardMaterial({
                         color: 0xffffff,
                         map: texture,
@@ -101,11 +105,11 @@ document.addEventListener("DOMContentLoaded", () => {
                         polygonOffsetFactor: -4,
                         flatShading: true
                     });
-                    
+
                     const position = new THREE.Vector3(0, 0, 1);
                     const orientation = new THREE.Euler(0, 0, 0);
                     const size = new THREE.Vector3(1.2, 1.2, 1.2);
-                    
+
                     const decalGeo = new THREE.DecalGeometry(mesh, position, orientation, size);
                     const decalMesh = new THREE.Mesh(decalGeo, decalMaterial);
                     group.add(decalMesh);
