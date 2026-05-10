@@ -76,30 +76,42 @@ document.addEventListener("DOMContentLoaded", () => {
         group.add(mesh);
 
         const textureLoader = new THREE.TextureLoader();
-        textureLoader.crossOrigin = "Anonymous";
-        textureLoader.load(iconUrl, (texture) => {
-            texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
-            
-            const decalMaterial = new THREE.MeshStandardMaterial({
-                color: 0xffffff,
-                map: texture,
-                transparent: true,
-                depthTest: true,
-                depthWrite: false,
-                polygonOffset: true,
-                polygonOffsetFactor: -4,
-                flatShading: true
-            });
-            
-            // Decal position and orientation
-            const position = new THREE.Vector3(0, 0, 1);
-            const orientation = new THREE.Euler(0, 0, 0);
-            const size = new THREE.Vector3(1.2, 1.2, 1.2);
-            
-            const decalGeo = new THREE.DecalGeometry(mesh, position, orientation, size);
-            const decalMesh = new THREE.Mesh(decalGeo, decalMaterial);
-            group.add(decalMesh);
-        });
+        
+        fetch(iconUrl)
+            .then(res => res.text())
+            .then(svgText => {
+                // Strip existing width/height to avoid conflicts
+                svgText = svgText.replace(/width="[^"]*"/g, '').replace(/height="[^"]*"/g, '');
+                // Inject explicit pixel dimensions for WebGL
+                svgText = svgText.replace('<svg ', '<svg width="256" height="256" ');
+                
+                const base64 = btoa(unescape(encodeURIComponent(svgText)));
+                const dataUrl = `data:image/svg+xml;base64,${base64}`;
+                
+                textureLoader.load(dataUrl, (texture) => {
+                    texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+                    
+                    const decalMaterial = new THREE.MeshStandardMaterial({
+                        color: 0xffffff,
+                        map: texture,
+                        transparent: true,
+                        depthTest: true,
+                        depthWrite: false,
+                        polygonOffset: true,
+                        polygonOffsetFactor: -4,
+                        flatShading: true
+                    });
+                    
+                    const position = new THREE.Vector3(0, 0, 1);
+                    const orientation = new THREE.Euler(0, 0, 0);
+                    const size = new THREE.Vector3(1.2, 1.2, 1.2);
+                    
+                    const decalGeo = new THREE.DecalGeometry(mesh, position, orientation, size);
+                    const decalMesh = new THREE.Mesh(decalGeo, decalMaterial);
+                    group.add(decalMesh);
+                });
+            })
+            .catch(err => console.error("SVG fetch error:", err));
 
         let time = Math.random() * 100;
         function animate() {
