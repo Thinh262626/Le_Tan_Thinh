@@ -252,3 +252,54 @@ window.addEventListener('scroll', () => {
   // Bắt đầu sau khi intro loader biến mất
   setTimeout(tick, 2000);
 })();
+
+// ===== LANGUAGE TOGGLE =====
+(function() {
+  const btn = document.getElementById('lang-toggle');
+  if (!btn) return;
+
+  let isEN = localStorage.getItem('lang') === 'en';
+
+  function applyLang() {
+    document.documentElement.lang = isEN ? 'en' : 'vi';
+    btn.textContent = isEN ? 'VI' : 'EN';
+
+    // Plain text swaps
+    document.querySelectorAll('[data-en]').forEach(el => {
+      if (isEN) {
+        if (!el.dataset.vi) el.dataset.vi = el.textContent.trim();
+        el.textContent = el.dataset.en;
+      } else {
+        if (el.dataset.vi) el.textContent = el.dataset.vi;
+      }
+    });
+
+    // HTML content swaps (elements with bold/em/br inside)
+    document.querySelectorAll('[data-en-html]').forEach(el => {
+      if (isEN) {
+        if (!el.dataset.viHtml) el.dataset.viHtml = el.innerHTML;
+        el.innerHTML = el.dataset.enHtml;
+      } else {
+        if (el.dataset.viHtml) el.innerHTML = el.dataset.viHtml;
+      }
+    });
+
+    // Placeholder swaps
+    document.querySelectorAll('[data-en-placeholder]').forEach(el => {
+      if (isEN) {
+        if (!el.dataset.viPlaceholder) el.dataset.viPlaceholder = el.placeholder;
+        el.placeholder = el.dataset.enPlaceholder;
+      } else {
+        if (el.dataset.viPlaceholder) el.placeholder = el.dataset.viPlaceholder;
+      }
+    });
+  }
+
+  if (isEN) applyLang();
+
+  btn.addEventListener('click', () => {
+    isEN = !isEN;
+    localStorage.setItem('lang', isEN ? 'en' : 'vi');
+    applyLang();
+  });
+})();

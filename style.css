@@ -261,6 +261,10 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
 .nav-cta{font-size:12px;font-weight:700;color:#0C0C0F;background:linear-gradient(135deg,var(--gold),var(--bronze));text-decoration:none;padding:8px 18px;border-radius:100px;transition:all .25s}
 .nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(201,169,110,.3)}
 
+/* ===== LANG TOGGLE ===== */
+.lang-toggle{background:transparent;border:1px solid rgba(201,169,110,.45);color:var(--gold);font-family:'Poppins',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.12em;padding:4px 11px;border-radius:5px;cursor:pointer;transition:all .2s ease;flex-shrink:0}
+.lang-toggle:hover{background:var(--gold);color:#0C0C0F}
+
 /* ===== BACK TO TOP ===== */
 .back-top{position:fixed;bottom:32px;right:32px;z-index:999;width:44px;height:44px;background:rgba(201,169,110,.1);border:1px solid rgba(201,169,110,.25);border-radius:12px;color:var(--gold);font-size:18px;cursor:pointer;backdrop-filter:blur(12px);transition:all .3s;opacity:0;transform:translateY(20px);pointer-events:none}
 .back-top.visible{opacity:1;transform:translateY(0);pointer-events:auto}
@@ -770,3 +774,91 @@ body.cur-click #cursor-dot{background:#fff}
   padding:2px 8px;
 }
 .todo-link{position:relative}
+
+/* ===================================================
+   PRINT / SAVE AS PDF
+   =================================================== */
+@media print {
+  /* — Base reset — */
+  *,*::before,*::after{
+    background-image:none!important;
+    box-shadow:none!important;
+    backdrop-filter:none!important;
+    animation:none!important;
+    transition:none!important;
+    text-shadow:none!important;
+  }
+  html,body{
+    background:#fff!important;
+    color:#111!important;
+    font-size:11pt;
+    line-height:1.5;
+  }
+
+  /* — Hide everything decorative / interactive — */
+  .intro-loader,.scroll-progress,.nav,.hamburger,
+  .mobile-menu,.mobile-overlay,.cursor-glow,
+  #cursor-dot,#cursor-ring,.bg-orbs,.noise,
+  .back-top,.float-contact,.marquee-wrap,
+  .brand-strip,.section-line,.tech-section-bg,
+  .card-skills-sphere,.contact-form-card,
+  .video-showcase-grid,.cf-notice,.booking-todo-tag,
+  .social-todo-tag,.vs-todo-chip,.footer-social,
+  .hero-book-btn,.contact-row-book,
+  footer { display:none!important; }
+
+  /* — Wrapper — */
+  .wrapper{max-width:100%;padding:10mm 12mm;margin:0}
+
+  /* — Cards — */
+  .card,.stat-cell,.hl-cell,.timeline-card,
+  .service-card,.testimonial-card{
+    background:#f7f7f8!important;
+    border:1px solid #ddd!important;
+    color:#111!important;
+    break-inside:avoid;
+    page-break-inside:avoid;
+  }
+
+  /* — Gradient text → solid — */
+  .name-main,.contact-headline,.hl-num{
+    -webkit-text-fill-color:#1a1a1a!important;
+    color:#1a1a1a!important;
+    background:none!important;
+  }
+  .stat-num,.ts-num,.booking-cta-label{
+    color:#8B6A40!important;
+    -webkit-text-fill-color:#8B6A40!important;
+    background:none!important;
+  }
+  em{color:#8B6A40!important;-webkit-text-fill-color:#8B6A40!important;font-style:normal}
+  .chip,.exp-badge,.exp-chip,.edu-badge,.proj-tag,.vs-platform-badge{
+    background:#eee!important;color:#333!important;border-color:#ccc!important;
+  }
+
+  /* — Grid resets for print — */
+  .bento-hero{grid-template-columns:1.6fr 0.8fr 0.8fr!important}
+  .bento-highlights{grid-template-columns:repeat(4,1fr)!important}
+  .bento-row2{grid-template-columns:1fr 1fr!important}
+  .bento-services{grid-template-columns:repeat(3,1fr)!important}
+  .bento-edu{grid-template-columns:1fr 1fr 1fr!important}
+  .bento-testimonials{grid-template-columns:repeat(3,1fr)!important}
+  .contact-bento{grid-template-columns:1fr!important}
+
+  /* — Page breaks — */
+  .bento-hero{page-break-after:avoid}
+  .timeline-item{page-break-inside:avoid}
+  .proj-acc-item{display:none}
+  .proj-acc-item.active,.proj-acc-item:first-child{display:flex!important}
+
+  /* — Visibility fixes — */
+  .reveal{opacity:1!important;transform:none!important}
+  .nav-links li,.nav-cta,.lang-toggle{display:none!important}
+  .card-avatar{display:none!important}
+
+  /* — Links: show URL for important ones — */
+  a.footer-btn::after,a.footer-btn-outline::after{
+    content:" ("attr(href)")";
+    font-size:8pt;color:#666;font-weight:400;
+  }
+}
