@@ -18,11 +18,50 @@ mobileClose.addEventListener('click', closeMenu);
 mobileOverlay.addEventListener('click', closeMenu);
 document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', closeMenu));
 
-// ===== CURSOR GLOW =====
+// ===== CURSOR GLOW (ambient) =====
 const cg = document.getElementById('cursor-glow');
 document.addEventListener('mousemove', e => { cg.style.left = e.clientX + 'px'; cg.style.top = e.clientY + 'px'; });
 document.addEventListener('mouseleave', () => cg.style.opacity = '0');
 document.addEventListener('mouseenter', () => cg.style.opacity = '1');
+
+// ===== CUSTOM CURSOR (dot + ring) =====
+(function() {
+  const dot  = document.getElementById('cursor-dot');
+  const ring = document.getElementById('cursor-ring');
+  if (!dot || !ring || window.matchMedia('(pointer:coarse)').matches) return;
+
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px';
+    dot.style.top  = my + 'px';
+  });
+
+  // Smooth ring follows with lerp
+  (function lerpRing() {
+    rx += (mx - rx) * 0.11;
+    ry += (my - ry) * 0.11;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(lerpRing);
+  })();
+
+  // Hover expand
+  const targets = 'a,button,[onclick],.card,.tech-ball-wrap,.video-slot,.proj-acc-item,.service-card,.stat-cell,.hl-cell';
+  document.querySelectorAll(targets).forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('cur-hover'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('cur-hover'));
+  });
+
+  // Click pulse
+  document.addEventListener('mousedown', () => document.body.classList.add('cur-click'));
+  document.addEventListener('mouseup',   () => document.body.classList.remove('cur-click'));
+
+  // Hide when leaving window
+  document.addEventListener('mouseleave', () => { dot.style.opacity = '0'; ring.style.opacity = '0'; });
+  document.addEventListener('mouseenter', () => { dot.style.opacity = '1'; ring.style.opacity = '1'; });
+})();
 
 // ===== SCROLL PROGRESS =====
 const progress = document.getElementById('scroll-progress');
@@ -71,8 +110,13 @@ const ro = new IntersectionObserver(entries => {
       ro.unobserve(e.target);
     }
   });
-}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-document.querySelectorAll('.reveal').forEach((el, i) => { el.dataset.d = (i % 6) * 70; ro.observe(el); });
+}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach((el) => { 
+  // Stagger effect based on index in parent
+  const idx = Array.from(el.parentElement.children).indexOf(el);
+  el.dataset.d = (idx >= 0 ? idx : 0) * 80; 
+  ro.observe(el); 
+});
 
 // ===== SKILL BARS =====
 const so = new IntersectionObserver(entries => {
@@ -110,16 +154,36 @@ const sro = new IntersectionObserver(entries => {
 }, { threshold: 0.4 });
 document.querySelectorAll('.stats-grid').forEach(el => sro.observe(el));
 
-// ===== CARD TILT (standard cards) =====
-document.querySelectorAll('.card').forEach(c => {
-  c.addEventListener('mousemove', e => {
-    const r = c.getBoundingClientRect();
-    const x = (e.clientX - r.left) / r.width - .5;
-    const y = (e.clientY - r.top) / r.height - .5;
-    c.style.transform = `perspective(800px) rotateY(${x * 3}deg) rotateX(${-y * 3}deg) translateZ(4px)`;
+// ===== CARD TILT (VanillaTilt) =====
+if (typeof VanillaTilt !== 'undefined') {
+  VanillaTilt.init(document.querySelectorAll(".card"), {
+      max: 8,
+      speed: 400,
+      glare: true,
+      "max-glare": 0.15,
+      perspective: 1000
   });
-  c.addEventListener('mouseleave', () => c.style.transform = '');
-});
+}
+
+// ===== 3D TECH SPHERE (TagCloud) =====
+const skillsContainer = document.getElementById('skills-sphere');
+if (skillsContainer && typeof TagCloud !== 'undefined') {
+    const mySkills = [
+        'Marketing', 'Branding', 'TikTok',
+        'Sales', 'AIGC', 'AI · n8n',
+        'Leadership', 'KOL Mgmt', 'ISO 9001',
+        'Luxury', 'Analytics', 'MBA', 'Strategy', 'Content'
+    ];
+    TagCloud(skillsContainer, mySkills, {
+        radius: 130, maxSpeed: 'fast', initSpeed: 'normal', direction: 225, keep: true
+    });
+}
+
+// ===== PROJECT ACCORDION =====
+window.activateProject = function(el) {
+    document.querySelectorAll('.proj-acc-item').forEach(item => item.classList.remove('active'));
+    el.classList.add('active');
+};
 
 // ===== MAGNETIC EFFECT (service cards) =====
 document.querySelectorAll('.service-card .svc-icon, .nav-cta, .footer-btn').forEach(el => {
@@ -155,3 +219,89 @@ window.addEventListener('scroll', () => {
   if (window.scrollY > 300) floatContact.classList.add('visible');
   else floatContact.classList.remove('visible');
 }, { passive: true });
+
+// ===== TYPEWRITER =====
+(function() {
+  const roles = [
+    'Marketing & Brand Strategist',
+    'TikTok Content Ecosystem Builder',
+    'AI Automation Consultant',
+    'Luxury Brand Specialist',
+    'Sales · 6B VND Revenue',
+    'Content Creator · 200M+ Views',
+  ];
+  const el = document.getElementById('typewriter-role');
+  if (!el) return;
+  let ri = 0, ci = 0, deleting = false;
+
+  function tick() {
+    const word = roles[ri];
+    el.textContent = deleting ? word.slice(0, ci--) : word.slice(0, ci++);
+
+    if (!deleting && ci > word.length) {
+      deleting = true;
+      setTimeout(tick, 2200);
+    } else if (deleting && ci < 0) {
+      deleting = false;
+      ri = (ri + 1) % roles.length;
+      setTimeout(tick, 420);
+    } else {
+      setTimeout(tick, deleting ? 36 : 68);
+    }
+  }
+  // Bắt đầu sau khi intro loader biến mất
+  setTimeout(tick, 2000);
+})();
+
+// ===== LANGUAGE TOGGLE =====
+(function() {
+  const btn = document.getElementById('lang-toggle');
+  if (!btn) return;
+
+  // Default to EN if no preference is saved
+  let savedLang = localStorage.getItem('lang');
+  let isEN = savedLang === null ? true : (savedLang === 'en');
+
+  function applyLang() {
+    document.documentElement.lang = isEN ? 'en' : 'vi';
+    btn.textContent = isEN ? 'VI' : 'EN';
+
+    // Plain text swaps
+    document.querySelectorAll('[data-en]').forEach(el => {
+      if (isEN) {
+        if (!el.dataset.vi) el.dataset.vi = el.textContent.trim();
+        el.textContent = el.dataset.en;
+      } else {
+        if (el.dataset.vi) el.textContent = el.dataset.vi;
+      }
+    });
+
+    // HTML content swaps (elements with bold/em/br inside)
+    document.querySelectorAll('[data-en-html]').forEach(el => {
+      if (isEN) {
+        if (!el.dataset.viHtml) el.dataset.viHtml = el.innerHTML;
+        el.innerHTML = el.dataset.enHtml;
+      } else {
+        if (el.dataset.viHtml) el.innerHTML = el.dataset.viHtml;
+      }
+    });
+
+    // Placeholder swaps
+    document.querySelectorAll('[data-en-placeholder]').forEach(el => {
+      if (isEN) {
+        if (!el.dataset.viPlaceholder) el.dataset.viPlaceholder = el.placeholder;
+        el.placeholder = el.dataset.enPlaceholder;
+      } else {
+        if (el.dataset.viPlaceholder) el.placeholder = el.dataset.viPlaceholder;
+      }
+    });
+  }
+
+  if (isEN) applyLang();
+
+  btn.addEventListener('click', () => {
+    isEN = !isEN;
+    localStorage.setItem('lang', isEN ? 'en' : 'vi');
+    applyLang();
+  });
+})();
