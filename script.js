@@ -304,6 +304,13 @@ window.addEventListener('scroll', () => {
   function applyLang() {
     document.documentElement.lang = isEN ? 'en' : 'vi';
     btn.textContent = isEN ? 'VI' : 'EN';
+    btn.dataset.tooltip = isEN ? '🇻🇳 Xem bằng Tiếng Việt' : '🇬🇧 View in English';
+
+    // Sync CV download links to current language
+    ['nav-download', 'footer-download'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.href = isEN ? 'letanthinh-cv-en.pdf' : 'letanthinh-cv-vi.pdf';
+    });
 
     // Plain text swaps
     document.querySelectorAll('[data-en]').forEach(el => {
@@ -336,7 +343,16 @@ window.addEventListener('scroll', () => {
     });
   }
 
-  if (isEN) applyLang();
+  applyLang();
+
+  // Pulse once on first-ever visit to hint language is switchable
+  if (!localStorage.getItem('lang-hinted')) {
+    setTimeout(() => {
+      btn.classList.add('lang-pulse-once');
+      btn.addEventListener('animationend', () => btn.classList.remove('lang-pulse-once'), { once: true });
+      localStorage.setItem('lang-hinted', '1');
+    }, 1200);
+  }
 
   btn.addEventListener('click', () => {
     isEN = !isEN;
