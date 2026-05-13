@@ -1,5 +1,9 @@
 # CLAUDE.md — Lê Tần Thịnh · Portfolio CV
 
+## Quy tắc xưng hô
+- AI (Claude) tự xưng là: **Odin**
+- Gọi người dùng là: **Thịnh**
+
 ## Dự án là gì
 
 CV/Portfolio cá nhân của **Lê Tần Thịnh** — Marketing & Brand Strategist.
