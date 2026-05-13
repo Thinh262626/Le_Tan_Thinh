@@ -70,6 +70,7 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
 
 .name-label{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:.35em;color:var(--muted);margin-bottom:4px}
 .name-main{font-family:'Syne',sans-serif;font-size:clamp(60px,9vw,96px);font-weight:800;line-height:.9;letter-spacing:-.02em;background:linear-gradient(140deg,#fff 20%,var(--gold) 60%,var(--bronze) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:20px;white-space:nowrap;cursor:default}
+.sc-char{display:inline-block;text-align:center;user-select:none}
 
 .title-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
 .chip{font-size:12px;font-weight:600;border-radius:100px;padding:5px 16px;background:rgba(201,169,110,.08);border:1px solid rgba(201,169,110,.18);color:rgba(201,169,110,.85)}
@@ -635,6 +636,10 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
   box-shadow:0 4px 20px rgba(201,169,110,.25);
 }
 .cf-submit:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 8px 30px rgba(201,169,110,.4)}
+.cf-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.cf-status{font-size:13px;min-height:20px;transition:all .3s}
+.cf-status.success{color:#4ade80}
+.cf-status.error{color:#f87171}
 
 /* Footer social icons */
 .footer{display:flex;justify-content:space-between;align-items:center;padding:20px 28px;

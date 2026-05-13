@@ -202,6 +202,45 @@ document.querySelectorAll('.service-card .svc-icon, .nav-cta, .footer-btn').forE
 
 
 
+// ===== NAME DECODE EFFECT =====
+(function() {
+  const POOL = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&?!*';
+  const ORIG = ['T','H','Ị','N','H'];
+
+  function runDecode(spans) {
+    let frame = 0;
+    const TOTAL = 22;
+    let id = setInterval(() => {
+      spans.forEach((s, i) => {
+        const resolveAt = TOTAL - (ORIG.length - 1 - i) * 3;
+        s.textContent = (frame >= resolveAt)
+          ? ORIG[i]
+          : POOL[Math.floor(Math.random() * POOL.length)];
+      });
+      if (++frame > TOTAL + 2) clearInterval(id);
+    }, 40);
+  }
+
+  document.fonts.ready.then(() => {
+    const h1 = document.querySelector('.name-main');
+    if (!h1) return;
+    const spans = h1.querySelectorAll('.sc-char');
+    if (!spans.length) return;
+
+    // Lock each span to its natural rendered width so random chars never shift layout
+    spans.forEach(s => {
+      const w = s.getBoundingClientRect().width;
+      if (w > 0) s.style.width = w + 'px';
+    });
+
+    // Decode on initial load (after intro fades at ~1800ms)
+    setTimeout(() => runDecode(spans), 2200);
+
+    // Re-trigger on hover
+    h1.addEventListener('mouseenter', () => runDecode(spans));
+  });
+})();
+
 // ===== PARALLAX ORBS =====
 window.addEventListener('scroll', () => {
   const y = window.scrollY;
@@ -303,5 +342,126 @@ window.addEventListener('scroll', () => {
     isEN = !isEN;
     localStorage.setItem('lang', isEN ? 'en' : 'vi');
     applyLang();
+  });
+})();
+
+// ===== BACKEND API HELPERS =====
+const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+  ? ''   // local dev: relative path (dùng vercel dev)
+  : '';  // production: same origin trên Vercel
+
+function getLang() {
+  return localStorage.getItem('lang') === 'vi' ? 'vi' : 'en';
+}
+
+function apiPost(path, body) {
+  return fetch(API_BASE + path, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  }).then(r => r.json());
+}
+
+// ===== CONTACT FORM =====
+(function() {
+  const form     = document.getElementById('cf-form');
+  const statusEl = document.getElementById('cf-status');
+  const submitBtn = document.getElementById('cf-submit');
+  if (!form) return;
+
+  const MSG = {
+    sending: { vi: 'Đang gửi...', en: 'Sending...' },
+    success: { vi: '✓ Đã gửi! Thịnh sẽ liên hệ lại sớm.', en: '✓ Sent! Thịnh will get back to you soon.' },
+    error:   { vi: '✗ Gửi thất bại, vui lòng thử lại.', en: '✗ Failed to send. Please try again.' },
+  };
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const lang = getLang();
+
+    const name    = document.getElementById('cf-name').value.trim();
+    const email   = document.getElementById('cf-email').value.trim();
+    const subject = document.getElementById('cf-subject').value.trim();
+    const message = document.getElementById('cf-message').value.trim();
+
+    if (!name || !email) return;
+
+    submitBtn.disabled = true;
+    statusEl.className = 'cf-status';
+    statusEl.textContent = MSG.sending[lang];
+
+    try {
+      const res = await apiPost('/api/contact', { name, email, subject, message, lang });
+
+      if (res.success) {
+        statusEl.className = 'cf-status success';
+        statusEl.textContent = MSG.success[lang];
+        form.reset();
+        setTimeout(() => { statusEl.textContent = ''; statusEl.className = 'cf-status'; }, 6000);
+      } else {
+        throw new Error(res.error || 'unknown');
+      }
+    } catch {
+      statusEl.className = 'cf-status error';
+      statusEl.textContent = MSG.error[lang];
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+})();
+
+// ===== CV DOWNLOAD TRACKING =====
+(function() {
+  document.querySelectorAll('[download], #nav-download, #footer-download').forEach(el => {
+    el.addEventListener('click', () => {
+      apiPost('/api/download', { lang: getLang() }).catch(() => {});
+    });
+  });
+})();
+
+// ===== ANALYTICS — PAGE VIEW + SECTION TRACKING =====
+(function() {
+  // Page view on load
+  apiPost('/api/analytics', {
+    event_type: 'page_view',
+    payload: { lang: getLang(), path: location.pathname },
+  }).catch(() => {});
+
+  // Section views (dùng lại IntersectionObserver riêng)
+  const tracked = new Set();
+  const sectionMap = {
+    'what-i-do': 'services',
+    'card-tiktok': 'tiktok',
+    'job-1': 'experience',
+    'card-degrees': 'education',
+    'project-1': 'projects',
+    'contact': 'contact',
+  };
+
+  const svo = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !tracked.has(e.target.id)) {
+        tracked.add(e.target.id);
+        apiPost('/api/analytics', {
+          event_type: 'section_view',
+          payload: { section: sectionMap[e.target.id], lang: getLang() },
+        }).catch(() => {});
+      }
+    });
+  }, { threshold: 0.4 });
+
+  Object.keys(sectionMap).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) svo.observe(el);
+  });
+
+  // Book call clicks
+  document.querySelectorAll('.hero-book-btn, .booking-cta').forEach(el => {
+    el.addEventListener('click', () => {
+      apiPost('/api/analytics', {
+        event_type: 'book_call_click',
+        payload: { lang: getLang() },
+      }).catch(() => {});
+    });
   });
 })();
