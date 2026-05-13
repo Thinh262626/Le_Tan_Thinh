@@ -240,6 +240,23 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
 /* ===== INTRO LOADER ===== */
 .intro-loader{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;align-items:center;justify-content:center;transition:opacity .6s ease,visibility .6s ease}
 .intro-loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+/* ===== LANG PICKER ===== */
+.lang-picker{position:fixed;inset:0;z-index:9998;background:var(--bg);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:48px;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .5s ease,visibility .5s ease}
+.lang-picker.active{opacity:1;visibility:visible;pointer-events:auto}
+.lang-picker.done{opacity:0;visibility:hidden;pointer-events:none;transition:opacity .4s ease,visibility .4s ease}
+.lang-picker-eyebrow{font-family:'Syne',sans-serif;font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:var(--muted);opacity:0;animation:none}
+.lang-picker.active .lang-picker-eyebrow{animation:fadeUp .5s ease .05s both}
+.lang-picker-row{display:flex;align-items:center;opacity:0;animation:none}
+.lang-picker.active .lang-picker-row{animation:fadeUp .5s ease .15s both}
+.lang-opt{background:none;border:none;cursor:pointer;padding:18px 52px;display:flex;flex-direction:column;align-items:center;gap:14px;transition:transform .25s ease,opacity .25s ease;position:relative}
+.lang-opt::after{content:'';position:absolute;bottom:10px;left:50%;transform:translateX(-50%) scaleX(0);width:24px;height:1.5px;background:var(--gold);border-radius:2px;transition:transform .25s ease}
+.lang-opt:hover{transform:translateY(-4px)}
+.lang-opt:hover::after{transform:translateX(-50%) scaleX(1)}
+.lang-opt-flag{font-size:2.4rem;line-height:1;transition:transform .25s ease}
+.lang-opt:hover .lang-opt-flag{transform:scale(1.08)}
+.lang-opt-name{font-family:'Syne',sans-serif;font-weight:600;font-size:.95rem;letter-spacing:.12em;color:var(--text);text-transform:uppercase;transition:color .25s ease}
+.lang-opt:hover .lang-opt-name{color:var(--gold)}
+.lang-opt-divider{width:1px;height:60px;background:rgba(255,255,255,.07);flex-shrink:0}
 .intro-inner{text-align:center}
 .intro-name-label{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;letter-spacing:.4em;color:var(--muted);margin-bottom:8px;opacity:0;animation:fadeUp .6s .3s forwards}
 .intro-name{font-family:'Syne',sans-serif;font-size:clamp(56px,12vw,110px);font-weight:800;line-height:.9;background:linear-gradient(140deg,#fff 20%,var(--gold) 60%,var(--bronze) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;opacity:0;animation:fadeUp .6s .5s forwards}

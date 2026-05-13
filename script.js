@@ -1,8 +1,32 @@
-// ===== INTRO LOADER =====
+// ===== INTRO LOADER + LANG PICKER =====
 window.addEventListener('load', () => {
+  const loader = document.getElementById('intro-loader');
+  const picker = document.getElementById('lang-picker');
+  const nav    = document.getElementById('main-nav');
+
   setTimeout(() => {
-    document.getElementById('intro-loader').classList.add('hidden');
-    document.getElementById('main-nav').classList.add('visible');
+    loader.classList.add('hidden');
+
+    if (localStorage.getItem('lang') !== null) {
+      // Return visitor — skip picker, go straight to site
+      nav.classList.add('visible');
+      return;
+    }
+
+    // First visit — fade in picker after loader fades out
+    setTimeout(() => picker.classList.add('active'), 400);
+
+    picker.querySelectorAll('.lang-opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const chosen = btn.dataset.lang;
+        localStorage.setItem('lang', chosen);
+        picker.classList.remove('active');
+        picker.classList.add('done');
+        // Default is EN — if user chose VI, trigger toggle to switch
+        if (chosen === 'vi') document.getElementById('lang-toggle').click();
+        setTimeout(() => nav.classList.add('visible'), 450);
+      }, { once: true });
+    });
   }, 1800);
 });
 
@@ -344,15 +368,6 @@ window.addEventListener('scroll', () => {
   }
 
   applyLang();
-
-  // Pulse once on first-ever visit to hint language is switchable
-  if (!localStorage.getItem('lang-hinted')) {
-    setTimeout(() => {
-      btn.classList.add('lang-pulse-once');
-      btn.addEventListener('animationend', () => btn.classList.remove('lang-pulse-once'), { once: true });
-      localStorage.setItem('lang-hinted', '1');
-    }, 1200);
-  }
 
   btn.addEventListener('click', () => {
     isEN = !isEN;
