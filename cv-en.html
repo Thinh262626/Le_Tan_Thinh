@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Tan Thinh — CV English</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* ===== PRINT INSTRUCTIONS (hidden when printing) ===== */
+.print-hint{background:#1a1a1e;color:#c9a96e;font-family:'Poppins',sans-serif;font-size:12px;padding:10px 20px;text-align:center;border-bottom:1px solid rgba(201,169,110,.3)}
+.print-hint strong{color:#fff}
+@media print{.print-hint{display:none}}
+
+/* ===== PAGE ===== */
+@page{size:A4;margin:0}
+
+body{
+  font-family:'Poppins',system-ui,sans-serif;
+  font-size:10pt;
+  line-height:1.55;
+  color:#222;
+  background:#fff;
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
+}
+
+/* ===== LAYOUT ===== */
+.cv{
+  display:flex;
+  width:210mm;
+  min-height:297mm;
+  margin:0 auto;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar{
+  width:66mm;
+  background:#18181C;
+  color:#E8E4DF;
+  padding:32px 20px;
+  flex-shrink:0;
+}
+
+/* ===== MAIN ===== */
+.main{
+  flex:1;
+  padding:34px 26px 34px 24px;
+  background:#FAFAF8;
+}
+
+/* ===== SIDEBAR — PHOTO ===== */
+.avatar-wrap{
+  width:84px;height:84px;
+  border-radius:50%;
+  border:2.5px solid #C9A96E;
+  overflow:hidden;
+  margin:0 auto 20px;
+  box-shadow:0 0 0 4px rgba(201,169,110,.12);
+}
+.avatar-wrap img{width:100%;height:100%;object-fit:cover;object-position:top center}
+
+/* ===== SIDEBAR — SECTION ===== */
+.s-section{margin-bottom:20px}
+.s-title{
+  font-family:'Syne',sans-serif;
+  font-weight:700;
+  font-size:7pt;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  color:#C9A96E;
+  border-bottom:1px solid rgba(201,169,110,.25);
+  padding-bottom:5px;
+  margin-bottom:10px;
+}
+
+/* ===== SIDEBAR — CONTACT ===== */
+.c-item{display:flex;align-items:flex-start;gap:7px;margin-bottom:6px;font-size:8.5pt;color:#B8B4AF;line-height:1.4}
+.c-icon{color:#C9A96E;flex-shrink:0;font-size:9pt;margin-top:0px;width:14px;text-align:center}
+
+/* ===== SIDEBAR — SKILLS ===== */
+.sg-label{font-size:7pt;font-weight:600;color:#7A7A8A;text-transform:uppercase;letter-spacing:1px;margin:10px 0 5px}
+.sk-item{font-size:8.5pt;color:#C8C4BF;padding:2.5px 0;border-bottom:1px solid rgba(255,255,255,.04);line-height:1.35}
+.sk-item:last-child{border-bottom:none}
+
+/* ===== SIDEBAR — LANGUAGES ===== */
+.lang-row{display:flex;justify-content:space-between;padding:3.5px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:8.5pt}
+.lang-row:last-child{border-bottom:none}
+.lang-name{color:#C8C4BF}
+.lang-level{color:#C9A96E;font-weight:500;font-size:8pt}
+
+/* ===== SIDEBAR — EDUCATION ===== */
+.edu-item{margin-bottom:12px}
+.edu-degree{font-size:8.5pt;font-weight:600;color:#E8E4DF;line-height:1.35}
+.edu-school{font-size:8pt;color:#8A8A96;margin:2px 0 1px}
+.edu-period{font-size:7.5pt;color:#C9A96E;font-style:italic}
+.edu-note{font-size:7.5pt;color:#6A6A76;margin-top:2px;line-height:1.3}
+
+/* ===== SIDEBAR — TOOLS ===== */
+.tg-wrap{margin-bottom:9px}
+.tg-label{font-size:7pt;font-weight:600;color:#C9A96E;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px}
+.tg-text{font-size:8pt;color:#8A8A96;line-height:1.55}
+
+/* ===== SIDEBAR — PROFESSIONAL DEV ===== */
+.pd-item{padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.pd-item:last-child{border-bottom:none}
+.pd-name{font-size:8pt;color:#C8C4BF;font-style:italic;line-height:1.3}
+.pd-meta{font-size:7.5pt;color:#6A6A76;margin-top:1px}
+
+/* ===== MAIN — HEADER ===== */
+.m-header{margin-bottom:18px}
+.m-name{
+  font-family:'Syne',sans-serif;
+  font-weight:700;
+  font-size:19pt;
+  color:#18181C;
+  line-height:1.1;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+}
+.m-title{
+  font-family:'Syne',sans-serif;
+  font-weight:600;
+  font-size:11pt;
+  color:#C9A96E;
+  margin:5px 0 3px;
+  letter-spacing:.3px;
+}
+.m-sub{font-size:8pt;color:#999;letter-spacing:2px;text-transform:uppercase}
+.m-divider{width:38px;height:2.5px;background:#C9A96E;margin:10px 0;border-radius:2px}
+
+/* ===== MAIN — SECTION ===== */
+.m-section{margin-bottom:20px}
+.m-section-title{
+  font-family:'Syne',sans-serif;
+  font-weight:700;
+  font-size:7pt;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  color:#18181C;
+  border-bottom:1.5px solid #C9A96E;
+  padding-bottom:5px;
+  margin-bottom:12px;
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+.m-section-title::before{content:'❖';color:#C9A96E;font-size:8pt}
+
+/* ===== MAIN — ABOUT ===== */
+.about-text{
+  font-size:9.5pt;
+  line-height:1.7;
+  color:#444;
+  font-style:italic;
+  border-left:2.5px solid #C9A96E;
+  padding-left:12px;
+}
+
+/* ===== MAIN — EXPERIENCE ===== */
+.exp-item{margin-bottom:16px;page-break-inside:avoid}
+.exp-item:last-child{margin-bottom:0}
+.exp-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:2px}
+.exp-company{font-family:'Syne',sans-serif;font-weight:700;font-size:10pt;color:#18181C}
+.exp-loc{font-size:8pt;color:#999;font-style:italic;font-family:'Poppins',sans-serif;font-weight:400}
+.exp-period{font-size:8pt;color:#C9A96E;font-weight:500;white-space:nowrap;text-align:right;flex-shrink:0;margin-left:8px}
+.exp-role{font-size:8.5pt;font-style:italic;color:#777;margin-bottom:6px}
+.exp-ul{list-style:none;padding:0}
+.exp-ul li{
+  font-size:9pt;
+  color:#333;
+  padding:2px 0 2px 14px;
+  position:relative;
+  line-height:1.5;
+}
+.exp-ul li::before{
+  content:'◆';
+  color:#C9A96E;
+  font-size:5pt;
+  position:absolute;
+  left:0;
+  top:5px;
+}
+.exp-ul li strong{font-weight:600;color:#1A1A1A}
+
+/* ===== MAIN — HIGHLIGHTS ===== */
+.hl-quote{
+  font-size:9pt;
+  font-style:italic;
+  color:#666;
+  text-align:center;
+  border-top:1px solid rgba(201,169,110,.2);
+  border-bottom:1px solid rgba(201,169,110,.2);
+  padding:8px 0;
+  margin-bottom:12px;
+  line-height:1.6;
+}
+.hl-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:7px;
+}
+.hl-card{
+  background:#F5F0E8;
+  border:1px solid rgba(201,169,110,.25);
+  border-top:2.5px solid #C9A96E;
+  border-radius:5px;
+  padding:9px 7px;
+  text-align:center;
+  page-break-inside:avoid;
+}
+.hl-num{
+  font-family:'Syne',sans-serif;
+  font-weight:800;
+  font-size:14pt;
+  color:#18181C;
+  line-height:1;
+}
+.hl-label{font-size:6.5pt;text-transform:uppercase;letter-spacing:.5px;color:#888;margin-top:3px;line-height:1.3}
+
+/* ===== MAIN — PROJECTS ===== */
+.proj-item{margin-bottom:13px;page-break-inside:avoid}
+.proj-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px}
+.proj-name{font-weight:600;font-size:9.5pt;color:#18181C;padding-right:8px}
+.proj-meta{font-size:7.5pt;color:#888;font-style:italic;text-align:right;flex-shrink:0;line-height:1.4}
+.proj-row{display:flex;gap:5px;margin-bottom:3px;font-size:8.5pt;color:#444;line-height:1.45}
+.proj-lbl{
+  font-size:7.5pt;
+  font-weight:700;
+  color:#C9A96E;
+  text-transform:uppercase;
+  letter-spacing:.8px;
+  font-style:italic;
+  flex-shrink:0;
+  width:68px;
+  padding-top:1px;
+}
+.proj-result{
+  background:#F5F0E8;
+  border-left:2.5px solid #C9A96E;
+  padding:5px 10px;
+  font-size:8.5pt;
+  color:#444;
+  margin-top:5px;
+  border-radius:0 4px 4px 0;
+  font-weight:500;
+}
+
+@media print{
+  body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .cv{width:210mm;margin:0}
+}
+</style>
+</head>
+<body>
+
+<div class="print-hint">
+  📄 To save as PDF: <strong>Cmd+P</strong> (Mac) or <strong>Ctrl+P</strong> (Windows) → Destination: <strong>Save as PDF</strong> → Margins: <strong>None</strong> → enable <strong>Background graphics</strong> → Save
+</div>
+
+<div class="cv">
+
+  <!-- ===== SIDEBAR ===== -->
+  <div class="sidebar">
+
+    <!-- Photo -->
+    <div class="avatar-wrap">
+      <img src="avatar.jpg" alt="Le Tan Thinh">
+    </div>
+
+    <!-- Contact -->
+    <div class="s-section">
+      <div class="s-title">Contact</div>
+      <div class="c-item"><span class="c-icon">✉</span><span>thinhlt.248b@ou.edu.vn</span></div>
+      <div class="c-item"><span class="c-icon">✆</span><span>+84 925 406 886</span></div>
+      <div class="c-item"><span class="c-icon">◎</span><span>Ho Chi Minh City, Vietnam</span></div>
+      <div class="c-item"><span class="c-icon">⬡</span><span style="font-size:7.5pt">thinh262626.github.io/Le_Tan_Thinh</span></div>
+      <div class="c-item"><span class="c-icon">◈</span><span>calendly.com/letanthinh</span></div>
+    </div>
+
+    <!-- Skills -->
+    <div class="s-section">
+      <div class="s-title">Skills</div>
+      <div class="sg-label">Leadership & Management</div>
+      <div class="sk-item">Team Leadership & People Management</div>
+      <div class="sk-item">Workflow Design & Process Standardization</div>
+      <div class="sk-item">Cross-functional Coordination</div>
+      <div class="sk-item">Strategic Planning</div>
+      <div class="sk-item">Stakeholder Management (C-level)</div>
+      <div class="sk-item">Mentoring & Coaching</div>
+      <div class="sg-label">Marketing / Brand / Sales</div>
+      <div class="sk-item">Content Strategy (Hub & Spoke)</div>
+      <div class="sk-item">Social Media Marketing</div>
+      <div class="sk-item">AI-Driven Content Production (AIGC)</div>
+      <div class="sk-item">Brand Strategy & Positioning</div>
+      <div class="sk-item">Integrated Marketing Campaigns</div>
+      <div class="sk-item">KOL / Influencer Marketing</div>
+      <div class="sk-item">Sales Pipeline & Process Design</div>
+      <div class="sk-item">Marketing Automation (n8n, API)</div>
+      <div class="sk-item">Quantitative Research (Consumer Behavior)</div>
+      <div class="sk-item">Personal Branding</div>
+      <div class="sk-item">Event Production</div>
+    </div>
+
+    <!-- Languages -->
+    <div class="s-section">
+      <div class="s-title">Languages</div>
+      <div class="lang-row"><span class="lang-name">Vietnamese</span><span class="lang-level">Native</span></div>
+      <div class="lang-row"><span class="lang-name">English</span><span class="lang-level">Proficient</span></div>
+      <div class="lang-row"><span class="lang-name">Chinese</span><span class="lang-level">HSK 3</span></div>
+    </div>
+
+    <!-- Education -->
+    <div class="s-section">
+      <div class="s-title">Education</div>
+      <div class="edu-item">
+        <div class="edu-degree">Master of Business Administration (MBA)</div>
+        <div class="edu-school">Ho Chi Minh City Open University</div>
+        <div class="edu-period">2024 – 2026</div>
+        <div class="edu-note">GPA 8.5/10 — Distinction</div>
+        <div class="edu-note">Thesis: Impact of AIGC on Purchase Intention in Fashion & Jewelry</div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-degree">Bachelor of English Language</div>
+        <div class="edu-school">Ho Chi Minh City University of Industry</div>
+        <div class="edu-period">2018 – 2022</div>
+        <div class="edu-note">Foundation for bilingual content & cross-cultural communication</div>
+      </div>
+    </div>
+
+    <!-- Tools -->
+    <div class="s-section">
+      <div class="s-title">Tools</div>
+      <div class="tg-wrap">
+        <div class="tg-label">Marketing & Analytics</div>
+        <div class="tg-text">Meta Ads · TikTok Ads · Google Ads · GA4 · Google Search Console · Google Trends</div>
+      </div>
+      <div class="tg-wrap">
+        <div class="tg-label">Content Production</div>
+        <div class="tg-text">Premiere Pro · CapCut · DaVinci Resolve · After Effects · Photoshop · Illustrator · Blender</div>
+      </div>
+      <div class="tg-wrap">
+        <div class="tg-label">AI & Automation</div>
+        <div class="tg-text">ChatGPT · Claude · Gemini API · Node.js · Telegraf · Puppeteer · n8n · Cron-jobs</div>
+      </div>
+      <div class="tg-wrap">
+        <div class="tg-label">Design & Operations</div>
+        <div class="tg-text">Figma · Canva · WordPress · Notion · Google Workspace · Sales CRM</div>
+      </div>
+    </div>
+
+    <!-- Professional Development -->
+    <div class="s-section">
+      <div class="s-title">Professional Development</div>
+      <div class="pd-item">
+        <div class="pd-name">Business Analysis Certificate</div>
+        <div class="pd-meta">FPT · 2023</div>
+      </div>
+      <div class="pd-item">
+        <div class="pd-name">AI/LLM Application in Marketing</div>
+        <div class="pd-meta">Hands-on · 2024 – Present</div>
+      </div>
+      <div class="pd-item">
+        <div class="pd-name">Marketing Automation (n8n, API)</div>
+        <div class="pd-meta">Self-taught · 2023 – Present</div>
+      </div>
+    </div>
+
+  </div>
+  <!-- end sidebar -->
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <div class="main">
+
+    <!-- Header -->
+    <div class="m-header">
+      <div class="m-name">LÊ TẦN THỊNH</div>
+      <div class="m-title">Marketing & Brand Strategist</div>
+      <div class="m-sub">Integrated Campaigns · Sales Growth · Team Leadership</div>
+      <div class="m-divider"></div>
+    </div>
+
+    <!-- About -->
+    <div class="m-section">
+      <div class="m-section-title">About</div>
+      <p class="about-text">Marketing & Brand Strategist with 4+ years building brands and digital content for the luxury diamond, education, and beauty industries. Standardized showroom operations to ISO 9001:2015 and developed a cross-platform content ecosystem reaching <strong style="color:#C9A96E;font-style:normal">200M+ views</strong>, directly converting to sales through social selling. Specializes in combining quantitative research (MBA) with AI-driven automation — reducing content production time by <strong style="color:#C9A96E;font-style:normal">60%</strong> while maintaining luxury-segment quality.</p>
+    </div>
+
+    <!-- Experience -->
+    <div class="m-section">
+      <div class="m-section-title">Work Experience</div>
+
+      <!-- Role 1 -->
+      <div class="exp-item">
+        <div class="exp-row">
+          <div>
+            <div class="exp-company">TÂM LUXURY <span class="exp-loc">— Ho Chi Minh City</span></div>
+            <div class="exp-role">Sales <span style="font-size:7.5pt;color:#aaa">(transitioned from Brand & Media Specialist)</span></div>
+          </div>
+          <div class="exp-period">May 2025 – Present</div>
+        </div>
+        <ul class="exp-ul">
+          <li>Generated <strong>6B VND</strong> in total revenue in the luxury diamond segment; managing an active pipeline of 20 past buyers and 100+ prospects.</li>
+          <li>Managed 2 Sales Admins and redesigned the end-to-end <strong>consultation – quoting – closing – after-sales</strong> process for the high-complexity diamond industry.</li>
+          <li>Developed and deployed an <strong>AI Sales Assistant integrated with Telegram</strong> (Node.js + LLM API): automated real-time pricing, personalized closing scripts, 24/7 lead nurturing.</li>
+          <li>Built cross-platform <strong>personal branding</strong> to self-generate high-quality leads independently of the main marketing funnel.</li>
+        </ul>
+      </div>
+
+      <!-- Role 2 -->
+      <div class="exp-item">
+        <div class="exp-row">
+          <div>
+            <div class="exp-company">TÂM LUXURY <span class="exp-loc">— Ho Chi Minh City</span></div>
+            <div class="exp-role">Brand & Media Specialist</div>
+          </div>
+          <div class="exp-period">Aug 2022 – Apr 2025</div>
+        </div>
+        <ul class="exp-ul">
+          <li>Reported directly to CEO; led an <strong>8-person Media team</strong> (Creator, Designer, Editor, Filmer) and mentored 3 interns + 2 junior staff.</li>
+          <li>Designed a full content workflow: ideation → scripting → shooting → editing → publishing → analytics, operating as an <strong>in-house mini agency</strong>.</li>
+          <li>Built an ecosystem of <strong>3 branded TikTok channels with 610K+ followers</strong>; worked directly with 50+ KOLs/Influencers.</li>
+          <li>Standardized showroom operations to <strong>ISO 9001:2015</strong> — 100% workflow coverage from intake to product handover.</li>
+          <li>Led production and KOL coordination for the <strong>company's largest VIP loyalty event in 2024</strong> (1,000+ luxury guests).</li>
+          <li>Pioneered AIGC in content production, <strong>reducing video editing time by 60%</strong> while maintaining luxury-segment quality.</li>
+        </ul>
+      </div>
+
+      <!-- Role 3 -->
+      <div class="exp-item">
+        <div class="exp-row">
+          <div>
+            <div class="exp-company">FREELANCE & CONSULTANCY <span class="exp-loc">— Ho Chi Minh City</span></div>
+            <div class="exp-role">Content Strategist & AI Solutions Consultant <span style="font-size:7.5pt;color:#aaa">(parallel)</span></div>
+          </div>
+          <div class="exp-period">2023 – Present</div>
+        </div>
+        <ul class="exp-ul">
+          <li>Built and managed TikTok channels across Healthcare, Cosmetics, Education, and Entertainment; key videos averaging <strong>1M+ views on TikTok</strong> and 100K–200K views on YouTube.</li>
+          <li><strong>Notable projects:</strong> "Vũ Trụ Cò Bay" music series with Phương Mỹ Chi (4M+ views), travel vlogs for Miss Vietnam-Australia Jolie Nguyễn, TikTok channels "Ngoại ngữ Thần tốc" and "Ông chú sức khoẻ."</li>
+          <li>Handled end-to-end production: scripting, filming, video editing, thumbnail design, publishing timelines, performance analytics.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Career Highlights -->
+    <div class="m-section">
+      <div class="m-section-title">Career Highlights</div>
+      <div class="hl-quote">"Four years — combining quantitative research (MBA) with hands-on brand &amp; sales execution in luxury, turning <em>content</em> into revenue and <em>AI</em> into a process lever."</div>
+      <div class="hl-grid">
+        <div class="hl-card"><div class="hl-num">200M+</div><div class="hl-label">Total Views Across Platforms</div></div>
+        <div class="hl-card"><div class="hl-num">610K+</div><div class="hl-label">TikTok Followers (Brand Ecosystem)</div></div>
+        <div class="hl-card"><div class="hl-num">6B VND</div><div class="hl-label">Sales Revenue in 12 Months</div></div>
+        <div class="hl-card"><div class="hl-num">50+</div><div class="hl-label">KOLs / Influencers Managed</div></div>
+        <div class="hl-card"><div class="hl-num">60%</div><div class="hl-label">Editing Time Reduced via AIGC</div></div>
+        <div class="hl-card"><div class="hl-num">&lt;5s</div><div class="hl-label">AI Sales Assistant Response Time</div></div>
+        <div class="hl-card"><div class="hl-num">1,000+</div><div class="hl-label">VIP Guests at Loyalty Event 2024</div></div>
+        <div class="hl-card"><div class="hl-num">4M+</div><div class="hl-label">Views "Vũ Trụ Cò Bay" Series</div></div>
+      </div>
+    </div>
+
+    <!-- Featured Projects -->
+    <div class="m-section">
+      <div class="m-section-title">Featured Projects</div>
+
+      <div class="proj-item">
+        <div class="proj-header">
+          <div class="proj-name">Case 01 — Social Media Ecosystem: 610K+ Followers</div>
+          <div class="proj-meta">Tâm Luxury · 2022–2024<br>Brand & Media Specialist</div>
+        </div>
+        <div class="proj-row"><span class="proj-lbl">CHALLENGE</span><span>High customer acquisition costs in luxury diamond — needed organic brand reach to reduce dependency on Paid Ads.</span></div>
+        <div class="proj-row"><span class="proj-lbl">STRATEGY</span><span>"Content Hub & Spoke" model: main channel for brand authority, sub-channels for diamond education and behind-the-scenes.</span></div>
+        <div class="proj-row"><span class="proj-lbl">EXECUTION</span><span>Led 8-person media team in multi-platform production; applied AIGC to optimize editing workflows (–60% time).</span></div>
+        <div class="proj-result">Results · 610K+ TikTok followers (main 500K+ · sub 100K+) · 200M+ cumulative views · significantly reduced Paid Ads dependency.</div>
+      </div>
+
+      <div class="proj-item">
+        <div class="proj-header">
+          <div class="proj-name">Case 02 — VIP Customer Loyalty Event 2024</div>
+          <div class="proj-meta">Tâm Luxury · 2024<br>Brand & Production Lead</div>
+        </div>
+        <div class="proj-row"><span class="proj-lbl">CHALLENGE</span><span>Design and produce the company's largest-ever loyalty event — delivering a luxury experience with unified brand identity.</span></div>
+        <div class="proj-row"><span class="proj-lbl">EXECUTION</span><span>Designed full event identity (poster, banner, video mapping); coordinated 50+ KOLs; supervised end-to-end from concept to post-event.</span></div>
+        <div class="proj-result">Results · 1,000+ luxury VIP guests · improved CSAT · large-scale organic post-event social discussion.</div>
+      </div>
+
+      <div class="proj-item">
+        <div class="proj-header">
+          <div class="proj-name">Case 03 — AI Sales Automation: Telegram Bot for Luxury Diamond</div>
+          <div class="proj-meta">Tâm Luxury · 2025–Present<br>Sales Lead (Solo Builder)</div>
+        </div>
+        <div class="proj-row"><span class="proj-lbl">STRATEGY</span><span>Combined Personal Branding with AI Automation to own the full marketing-to-revenue funnel.</span></div>
+        <div class="proj-row"><span class="proj-lbl">EXECUTION</span><span>Built end-to-end system: Node.js · Telegraf · Gemini/Claude API · Puppeteer · Cron-jobs. 100% automated consultation – real-time pricing – 24/7 lead nurturing.</span></div>
+        <div class="proj-result">Results · 6B VND revenue · response time reduced to &lt;5 seconds · 120+ leads on continuous automated nurturing.</div>
+      </div>
+
+      <div class="proj-item">
+        <div class="proj-header">
+          <div class="proj-name">Case 04 — "Vũ Trụ Cò Bay" — Singer Phương Mỹ Chi</div>
+          <div class="proj-meta">Freelance · 2024<br>Video Editor</div>
+        </div>
+        <div class="proj-row"><span class="proj-lbl">SCOPE</span><span>Handled video editing, post-production, and thumbnail design for a music–arts series by singer Phương Mỹ Chi.</span></div>
+        <div class="proj-result">Results · 4M+ views on TikTok & YouTube · confirmed ability to adapt content for tier-1 artists and youth audiences.</div>
+      </div>
+
+    </div>
+
+    <div style="text-align:center;font-size:8pt;color:#bbb;border-top:1px solid #e8e0d0;padding-top:10px;font-style:italic">
+      ❖ LÊ TẦN THỊNH · thinhlt.248b@ou.edu.vn · Updated May 2026 ❖
+    </div>
+
+  </div>
+  <!-- end main -->
+
+</div>
+<!-- end cv -->
+
+</body>
+</html>
