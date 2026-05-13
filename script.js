@@ -7,24 +7,29 @@ window.addEventListener('load', () => {
   setTimeout(() => {
     loader.classList.add('hidden');
 
-    if (localStorage.getItem('lang') !== null) {
-      // Return visitor — skip picker, go straight to site
-      nav.classList.add('visible');
-      return;
-    }
+    // Highlight the last-used language
+    const saved = localStorage.getItem('lang') || 'en';
+    picker.querySelectorAll('.lang-opt').forEach(btn => {
+      btn.classList.toggle('current', btn.dataset.lang === saved);
+    });
 
-    // First visit — fade in picker after loader fades out
+    // Always show picker on every page load
     setTimeout(() => picker.classList.add('active'), 400);
 
     picker.querySelectorAll('.lang-opt').forEach(btn => {
       btn.addEventListener('click', () => {
         const chosen = btn.dataset.lang;
+        const current = localStorage.getItem('lang') || 'en';
         localStorage.setItem('lang', chosen);
+
+        // Switch language only if different from current
+        if (chosen !== current) {
+          document.getElementById('lang-toggle').click();
+        }
+
         picker.classList.remove('active');
         picker.classList.add('done');
-        // Default is EN — if user chose VI, trigger toggle to switch
-        if (chosen === 'vi') document.getElementById('lang-toggle').click();
-        setTimeout(() => nav.classList.add('visible'), 450);
+        setTimeout(() => nav.classList.add('visible'), 420);
       }, { once: true });
     });
   }, 1800);
