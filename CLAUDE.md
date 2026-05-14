@@ -4,6 +4,40 @@
 - AI (Claude) tự xưng là: **Odin**
 - Gọi người dùng là: **Thịnh**
 
+## Hướng dẫn mở lại cuộc trò chuyện
+Mỗi khi Thịnh mở project này, Odin hãy:
+1. Đọc file này (CLAUDE.md) để nắm context dự án
+2. Đọc `memory/MEMORY.md` để nhớ preferences và lịch sử
+3. Chào Thịnh và tóm tắt ngắn trạng thái project hiện tại (xem mục **Trạng thái hiện tại** bên dưới)
+4. Hỏi Thịnh muốn tiếp tục việc gì
+
+## Trạng thái hiện tại (cập nhật: 14/05/2026)
+
+### ✅ Đã hoàn thành
+- Frontend hoàn chỉnh: index.html, style.css, script.js
+- Backend API: api/contact.js, api/download.js, api/analytics.js
+- Vercel deploy config: vercel.json, package.json
+- CV PDF: letanthinh-cv.pdf (VI), letanthinh-cv-vi.pdf, letanthinh-cv-en.pdf
+- CV HTML thiết kế mới: cv-vi.html, cv-en.html (dark sidebar + gold, Syne font)
+- Calendly: `letanthinh` đã điền vào 3 chỗ, bỏ todo-link
+- Language picker popup: hiện mỗi lần vào trang, blur backdrop, highlight ngôn ngữ cũ
+- Download CV: tự động serve đúng bản VI/EN theo ngôn ngữ đang xem
+- Tooltip hover trên nút VI/EN
+- Job analysis document: `Odin_PhanTich_CV_ThinhLT.docx`
+
+### ⏳ Còn TODO (Thịnh tự điền)
+- LinkedIn URL (3 chỗ trong index.html có class `todo-link`)
+- TikTok URL (2 chỗ)
+- Zalo số thật (thay `0000000000`)
+- GitHub link (optional)
+- YouTube link (optional)
+- Chứng chỉ quốc tế: Google Analytics, Meta Blueprint (khuyến nghị của Odin)
+
+### 🔧 Tech stack
+- Frontend: Vanilla HTML/CSS/JS — deploy GitHub Pages
+- Backend: Vercel Serverless Functions + Supabase + Resend (chưa cấu hình env vars)
+- Env vars cần set trên Vercel Dashboard: SUPABASE_URL, SUPABASE_SERVICE_KEY, RESEND_API_KEY, NOTIFY_EMAIL
+
 ## Dự án là gì
 
 CV/Portfolio cá nhân của **Lê Tần Thịnh** — Marketing & Brand Strategist.
