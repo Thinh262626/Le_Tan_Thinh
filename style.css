@@ -23,10 +23,10 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
 .wrapper{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:32px 20px 80px}
 
 /* CARD */
-/* --- CARD BASE --- */
+/* --- CARD BASE — bokeh city nights --- */
 .card{
   background:
-    linear-gradient(135deg,rgba(10,10,14,0.88) 0%,rgba(20,20,26,0.84) 100%),
+    linear-gradient(135deg,rgba(10,10,14,0.82) 0%,rgba(20,20,26,0.78) 100%),
     url('nairobi.png') center/cover no-repeat;
   border:1px solid var(--border);border-radius:var(--radius);
   padding:28px;transition:border-color .3s,transform .3s,box-shadow .3s;
@@ -34,17 +34,35 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
 .card:hover{border-color:rgba(201,169,110,.18);box-shadow:0 0 0 1px rgba(201,169,110,.07),0 20px 44px rgba(0,0,0,.55)}
 
 /* --- CARD BACKGROUND VARIANTS --- */
-/* About, Skills, Experience — world-map (global journey) */
+/* About, Skills, Experience, Testimonials — golden bokeh warm luxury */
 .card-about,.card-skills,.card-skills-sphere,.timeline-card,.testimonial-card{
   background:
-    linear-gradient(135deg,rgba(8,10,14,0.90) 0%,rgba(16,18,24,0.88) 100%),
-    url('world-map.png') center/cover no-repeat;
+    linear-gradient(135deg,rgba(10,8,6,0.84) 0%,rgba(18,14,8,0.80) 100%),
+    url('https://images.unsplash.com/photo-1760437429636-2e280cf3726f?w=1920&q=80&auto=format&fit=crop') center/cover no-repeat;
 }
-/* Services, Education — white-abstract (clean & academic) */
-.service-card,.card-degrees,.card-certs{
+/* Services — dark glass skyscrapers looking up */
+.service-card{
   background:
-    linear-gradient(135deg,rgba(10,10,14,0.90) 0%,rgba(22,20,28,0.87) 100%),
-    url('white-abstract.png') center/cover no-repeat;
+    linear-gradient(165deg,rgba(10,12,16,0.86) 0%,rgba(16,18,24,0.90) 100%),
+    url('https://images.unsplash.com/photo-1522069365959-25716fb5001a?w=1920&q=80&auto=format&fit=crop') center/cover no-repeat;
+}
+/* Education / Certs — geometric architectural facade */
+.card-degrees,.card-certs{
+  background:
+    linear-gradient(165deg,rgba(10,12,16,0.86) 0%,rgba(16,18,24,0.90) 100%),
+    url('https://images.unsplash.com/photo-1488972685288-c3fd157d7c7a?w=1920&q=80&auto=format&fit=crop') center/cover no-repeat;
+}
+/* TikTok / Media / KOL — concert stage laser lights */
+.card-tiktok,.card-videos,.card-kol{
+  background:
+    linear-gradient(145deg,rgba(12,6,22,0.83) 0%,rgba(18,8,32,0.79) 100%),
+    url('https://images.unsplash.com/photo-1760539619529-cfd85a2a9cfd?w=1920&q=80&auto=format&fit=crop') center/cover no-repeat;
+}
+/* Case Study cards — aerial financial district top-down */
+.cs-card{
+  background:
+    linear-gradient(165deg,rgba(10,12,16,0.86) 0%,rgba(16,18,24,0.90) 100%),
+    url('https://images.unsplash.com/photo-1511883040705-6011fad9edfc?w=1920&q=80&auto=format&fit=crop') center/cover no-repeat;
 }
 /* Avatar — transparent, let avatar ring/glow show */
 #card-avatar{
@@ -88,7 +106,7 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
 /* STATS */
 .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .stat-cell{
-  background:linear-gradient(135deg,rgba(10,10,14,0.88),rgba(20,20,26,0.84)),url('nairobi.png') center/cover no-repeat;
+  background:linear-gradient(165deg,rgba(10,12,16,0.86),rgba(16,18,24,0.90)),url('https://images.unsplash.com/photo-1519687198309-ea5b4e52fc1c?w=1920&q=80&auto=format&fit=crop') center/cover no-repeat;
   border:1px solid var(--border);border-radius:16px;padding:14px;text-align:center;transition:all .25s;
 }
 .stat-cell:hover{border-color:rgba(201,169,110,.3);transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.4)}
@@ -212,9 +230,9 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
 .proj-acc-item{position:relative;flex-grow:1;border-radius:24px;overflow:hidden;cursor:pointer;transition:flex-grow 0.4s cubic-bezier(0.25, 1, 0.5, 1);will-change:flex-grow;display:flex;align-items:flex-end}
 .proj-acc-item.active{flex-grow:4}
 .proj-acc-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 0.4s ease;z-index:1}
-.proj-acc-bg.gradient-1{background:linear-gradient(135deg,rgba(20,20,28,0.90),rgba(30,30,45,0.85)),url('nairobi.png') center/cover no-repeat}
-.proj-acc-bg.gradient-2{background:linear-gradient(135deg,rgba(24,22,16,0.90),rgba(38,36,22,0.85)),url('nairobi.png') center/cover no-repeat}
-.proj-acc-bg.gradient-3{background:linear-gradient(135deg,rgba(14,18,22,0.90),rgba(22,28,36,0.85)),url('nairobi.png') center/cover no-repeat}
+.proj-acc-bg.gradient-1{background:linear-gradient(135deg,rgba(18,14,34,0.80),rgba(28,22,50,0.74)),url('https://images.unsplash.com/photo-1493514789931-586cb221d7a7?w=1920&q=80&auto=format&fit=crop') center/cover no-repeat}
+.proj-acc-bg.gradient-2{background:linear-gradient(135deg,rgba(28,20,8,0.80),rgba(44,32,10,0.74)),url('https://images.unsplash.com/photo-1493514789931-586cb221d7a7?w=1920&q=80&auto=format&fit=crop') center/cover no-repeat}
+.proj-acc-bg.gradient-3{background:linear-gradient(135deg,rgba(8,20,24,0.80),rgba(12,30,36,0.74)),url('https://images.unsplash.com/photo-1493514789931-586cb221d7a7?w=1920&q=80&auto=format&fit=crop') center/cover no-repeat}
 .proj-acc-item:hover .proj-acc-bg{transform:scale(1.05)}
 .proj-acc-item::after{content:'';position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%);z-index:2}
 .proj-acc-vertical{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:3;opacity:1;transition:opacity 0.3s}
@@ -392,10 +410,10 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
   .stats-strip{padding:20px}
 }
 
-/* ===== TECH SECTION BACKGROUND — y hệt Shaq bg-tech ===== */
+/* ===== TECH SECTION BACKGROUND ===== */
 .tech-section-bg{
   background:
-    linear-gradient(165deg,rgba(14,14,14,0.82) 0%,rgba(22,22,22,0.88) 100%),
+    linear-gradient(165deg,rgba(10,12,16,0.86) 0%,rgba(16,18,24,0.92) 100%),
     url('nairobi.png') center/cover no-repeat;
   border-radius:var(--radius);
   border:1px solid rgba(255,255,255,0.06);
@@ -470,16 +488,16 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
 .hl-cell{
   padding:24px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;
   transition:border-color .3s,transform .3s,box-shadow .3s;
-  background:linear-gradient(135deg,rgba(10,10,14,0.88),rgba(20,20,26,0.84)),url('nairobi.png') center/cover no-repeat;
+  background:linear-gradient(165deg,rgba(10,12,16,0.86),rgba(16,18,24,0.90)),url('https://images.unsplash.com/photo-1519687198309-ea5b4e52fc1c?w=1920&q=80&auto=format&fit=crop') center/cover no-repeat;
 }
-.hl-cell.hl-accent{background:linear-gradient(135deg,rgba(12,10,8,0.86),rgba(24,20,14,0.84)),url('nairobi.png') center/cover no-repeat;border-color:rgba(201,169,110,.18)}
+.hl-cell.hl-accent{background:linear-gradient(165deg,rgba(12,10,16,0.85),rgba(20,16,24,0.89)),url('https://images.unsplash.com/photo-1519687198309-ea5b4e52fc1c?w=1920&q=80&auto=format&fit=crop') center/cover no-repeat;border-color:rgba(201,169,110,.22)}
 .hl-cell:hover{border-color:rgba(201,169,110,.3);transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.5)}
 .hl-num{display:block;font-family:'Poppins',sans-serif;font-size:clamp(24px,3vw,38px);font-weight:800;background:linear-gradient(135deg,#fff 20%,var(--gold) 70%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1;margin-bottom:10px}
 .hl-label{display:block;font-size:10px;font-weight:700;letter-spacing:.07em;color:var(--muted);text-transform:uppercase;line-height:1.5}
 @media(max-width:700px){.bento-highlights{grid-template-columns:repeat(2,1fr)}}
 
 /* ===== PROJECT GRADIENT 4 ===== */
-.proj-acc-bg.gradient-4{background:linear-gradient(135deg,rgba(18,14,22,0.90),rgba(28,20,38,0.85)),url('nairobi.png') center/cover no-repeat}
+.proj-acc-bg.gradient-4{background:linear-gradient(135deg,rgba(16,10,28,0.80),rgba(26,16,44,0.74)),url('https://images.unsplash.com/photo-1493514789931-586cb221d7a7?w=1920&q=80&auto=format&fit=crop') center/cover no-repeat}
 
 /* ===== EDU THESIS ===== */
 .edu-thesis{font-size:10px;color:rgba(201,169,110,.65);margin-top:4px;line-height:1.4;font-style:italic}
@@ -530,7 +548,7 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
   display:flex;flex-direction:column;justify-content:space-between;
   text-decoration:none;cursor:pointer;
   transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s;
-  background:url('nairobi.png') center/cover no-repeat;
+  background:linear-gradient(160deg,rgba(4,4,8,0.80) 0%,rgba(8,6,14,0.85) 100%),url('https://images.unsplash.com/photo-1542388582-82bd66ff40ac?w=1920&q=80&auto=format&fit=crop') center/cover no-repeat;
 }
 .video-slot::before{
   content:'';position:absolute;inset:0;
@@ -804,6 +822,48 @@ body.cur-click #cursor-dot{background:#fff}
 }
 .todo-link{position:relative}
 
+/* CASE STUDIES */
+.case-studies{display:flex;flex-direction:column;gap:20px;margin-bottom:14px}
+.cs-card{padding:36px}
+.cs-header{margin-bottom:28px;padding-bottom:22px;border-bottom:1px solid var(--border)}
+.cs-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;margin-bottom:10px}
+.cs-title{font-family:'Syne',sans-serif;font-size:clamp(17px,2.4vw,24px);font-weight:700;line-height:1.25;margin-bottom:6px;background:linear-gradient(135deg,#fff 40%,var(--gold) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.cs-brand{font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.cs-body{display:flex;flex-direction:column;gap:28px}
+.cs-cols{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.cs-body.cs-body-split{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:start}
+.cs-left{display:flex;flex-direction:column;gap:24px}
+.cs-block-title{font-size:10px;font-weight:700;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin-bottom:10px}
+.cs-block-text{font-size:13.5px;color:var(--muted);line-height:1.8}
+.cs-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.cs-list li{font-size:13px;color:var(--muted);line-height:1.6;padding-left:18px;position:relative}
+.cs-list li::before{content:'▸';position:absolute;left:0;color:var(--gold);font-size:10px;top:3px}
+.cs-results{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:14px;padding:20px 24px}
+.cs-results-3{grid-template-columns:1fr 1fr}
+.cs-kpi{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
+.cs-kpi-num{font-family:'Syne',sans-serif;font-size:clamp(16px,2.2vw,22px);font-weight:800;background:linear-gradient(135deg,#fff 30%,var(--gold) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.cs-kpi-label{font-size:10px;color:var(--muted);line-height:1.4}
+.cs-kpi-wide{grid-column:span 2;padding-top:12px;border-top:1px solid var(--border)}
+/* Chat Demo */
+.cs-right{display:flex;flex-direction:column;gap:10px}
+.cs-chat-demo{background:#07070b;border:1px solid rgba(255,255,255,.07);border-radius:14px;overflow:hidden}
+.cs-chat-header{background:rgba(255,255,255,.04);padding:12px 16px;display:flex;align-items:center;gap:6px;border-bottom:1px solid rgba(255,255,255,.05)}
+.cs-chat-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0}
+.cs-dot-red{background:#FF5F57}.cs-dot-yellow{background:#FFBD2E}.cs-dot-green{background:#28C840}
+.cs-chat-title{font-size:10.5px;font-weight:600;color:var(--muted);margin-left:10px;letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cs-chat-body{padding:20px 16px;display:flex;flex-direction:column;gap:14px}
+.cs-msg{display:flex;gap:8px}
+.cs-msg-user{justify-content:flex-end;align-items:flex-end}
+.cs-msg-user span{background:rgba(201,169,110,.1);border:1px solid rgba(201,169,110,.18);border-radius:16px 16px 4px 16px;padding:10px 14px;font-size:12.5px;color:var(--text);max-width:85%;line-height:1.55;display:block}
+.cs-msg-bot{align-items:flex-start}
+.cs-msg-bot span{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:16px 16px 16px 4px;padding:10px 14px;font-size:12.5px;color:var(--text);max-width:85%;line-height:1.55;display:block}
+.cs-msg-bot span strong{color:var(--gold);font-weight:600}
+.cs-bot-avatar{width:28px;height:28px;min-width:28px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--bronze));display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:#0C0C0F;letter-spacing:.02em;flex-shrink:0;margin-top:2px}
+.cs-chat-timestamp{text-align:center;font-size:10px;color:var(--muted);opacity:.55;padding-top:2px}
+.cs-chat-note{font-size:10.5px;color:var(--muted);opacity:.5;text-align:center;font-style:italic}
+@media(max-width:900px){.cs-cols{grid-template-columns:1fr}.cs-body.cs-body-split{grid-template-columns:1fr}.cs-results{grid-template-columns:repeat(2,1fr)}.cs-results-3{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.cs-card{padding:22px}.cs-results{grid-template-columns:repeat(2,1fr);padding:16px 14px}}
+
 /* ===================================================
    PRINT / SAVE AS PDF
    =================================================== */
@@ -834,6 +894,7 @@ body.cur-click #cursor-dot{background:#fff}
   .video-showcase-grid,.cf-notice,.booking-todo-tag,
   .social-todo-tag,.vs-todo-chip,.footer-social,
   .hero-book-btn,.contact-row-book,
+  .cs-chat-demo,.cs-chat-note,
   footer { display:none!important; }
 
   /* — Wrapper — */

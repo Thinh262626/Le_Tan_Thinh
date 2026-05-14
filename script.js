@@ -109,7 +109,7 @@ backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smo
 
 // ===== NAV ACTIVE LINK =====
 const navLinks = document.querySelectorAll('.nav-link');
-const sections = ['card-about', 'what-i-do', 'card-tiktok', 'job-1', 'card-degrees', 'project-1'];
+const sections = ['card-about', 'what-i-do', 'card-tiktok', 'job-1', 'card-degrees', 'project-1', 'contact'];
 const sectionEls = sections.map(id => document.getElementById(id)).filter(Boolean);
 const navObs = new IntersectionObserver(entries => {
   entries.forEach(e => {
