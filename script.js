@@ -131,36 +131,39 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// ===== SCROLL REVEAL =====
-const ro = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('visible'), e.target.dataset.d || 0);
-      ro.unobserve(e.target);
-    }
+// ===== SCROLL REVEAL (CSS fallback — GSAP section below overrides when available) =====
+if (typeof gsap === 'undefined') {
+  const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), e.target.dataset.d || 0);
+        ro.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach((el) => {
+    const idx = Array.from(el.parentElement.children).indexOf(el);
+    el.dataset.d = (idx >= 0 ? idx : 0) * 80;
+    ro.observe(el);
   });
-}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.reveal').forEach((el) => { 
-  // Stagger effect based on index in parent
-  const idx = Array.from(el.parentElement.children).indexOf(el);
-  el.dataset.d = (idx >= 0 ? idx : 0) * 80; 
-  ro.observe(el); 
-});
+}
 
-// ===== SKILL BARS =====
-const so = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.querySelectorAll('.skill-fill').forEach(b => {
-        const w = b.dataset.width + '%';
-        b.style.width = '0';
-        requestAnimationFrame(() => setTimeout(() => b.style.width = w, 120));
-      });
-      so.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.2 });
-document.querySelectorAll('#card-skills').forEach(el => so.observe(el));
+// ===== SKILL BARS (CSS fallback — GSAP section below overrides when available) =====
+if (typeof gsap === 'undefined') {
+  const so = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.skill-fill').forEach(b => {
+          const w = b.dataset.width + '%';
+          b.style.width = '0';
+          requestAnimationFrame(() => setTimeout(() => b.style.width = w, 120));
+        });
+        so.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  document.querySelectorAll('#card-skills').forEach(el => so.observe(el));
+}
 
 // ===== STAT COUNTERS =====
 function countUp(el, t, s) {
@@ -183,14 +186,15 @@ const sro = new IntersectionObserver(entries => {
 }, { threshold: 0.4 });
 document.querySelectorAll('.stats-grid').forEach(el => sro.observe(el));
 
-// ===== CARD TILT (VanillaTilt) =====
-if (typeof VanillaTilt !== 'undefined') {
+// ===== CARD TILT (VanillaTilt) — desktop only =====
+const isTouch = window.matchMedia('(pointer:coarse)').matches;
+if (typeof VanillaTilt !== 'undefined' && !isTouch) {
   VanillaTilt.init(document.querySelectorAll(".card"), {
-      max: 8,
-      speed: 400,
+      max: 3,
+      speed: 700,
       glare: true,
-      "max-glare": 0.15,
-      perspective: 1000
+      "max-glare": 0.05,
+      perspective: 1200
   });
 }
 
@@ -209,10 +213,20 @@ if (skillsContainer && typeof TagCloud !== 'undefined') {
 }
 
 // ===== PROJECT ACCORDION =====
+let _projTimer = null;
 window.activateProject = function(el) {
-    document.querySelectorAll('.proj-acc-item').forEach(item => item.classList.remove('active'));
-    el.classList.add('active');
+    if (el.classList.contains('active')) return;
+    clearTimeout(_projTimer);
+    _projTimer = setTimeout(() => {
+        document.querySelectorAll('.proj-acc-item').forEach(item => item.classList.remove('active'));
+        el.classList.add('active');
+    }, 160);
 };
+// Cancel pending expand if mouse leaves the whole accordion
+document.addEventListener('DOMContentLoaded', () => {
+    const acc = document.querySelector('.projects-accordion');
+    if (acc) acc.addEventListener('mouseleave', () => clearTimeout(_projTimer));
+});
 
 // ===== MAGNETIC EFFECT (service cards) =====
 document.querySelectorAll('.service-card .svc-icon, .nav-cta, .footer-btn').forEach(el => {
@@ -270,16 +284,18 @@ document.querySelectorAll('.service-card .svc-icon, .nav-cta, .footer-btn').forE
   });
 })();
 
-// ===== PARALLAX ORBS =====
-window.addEventListener('scroll', () => {
-  const y = window.scrollY;
-  const orb1 = document.querySelector('.orb1');
-  const orb2 = document.querySelector('.orb2');
-  const orb3 = document.querySelector('.orb3');
-  if (orb1) orb1.style.transform = `translate(0, ${y * 0.12}px)`;
-  if (orb2) orb2.style.transform = `translate(0, ${-y * 0.08}px)`;
-  if (orb3) orb3.style.transform = `translate(0, ${y * 0.06}px)`;
-}, { passive: true });
+// ===== PARALLAX ORBS (CSS fallback — GSAP ScrollTrigger scrub overrides when available) =====
+if (typeof gsap === 'undefined') {
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    const orb1 = document.querySelector('.orb1');
+    const orb2 = document.querySelector('.orb2');
+    const orb3 = document.querySelector('.orb3');
+    if (orb1) orb1.style.transform = `translate(0, ${y * 0.12}px)`;
+    if (orb2) orb2.style.transform = `translate(0, ${-y * 0.08}px)`;
+    if (orb3) orb3.style.transform = `translate(0, ${y * 0.06}px)`;
+  }, { passive: true });
+}
 
 // ===== FLOATING CONTACT =====
 const floatContact = document.getElementById('float-contact');
@@ -455,6 +471,225 @@ function apiPost(path, body) {
   });
 })();
 
+// ===== GSAP SCROLL ANIMATIONS =====
+(function() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  // ── Lenis smooth scroll — desktop only (touch devices use native scroll) ──
+  if (typeof Lenis !== 'undefined' && !isTouch) {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      wheelMultiplier: 0.85,
+    });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  const HERO_IDS = new Set(['card-identity', 'card-avatar', 'card-stats', 'card-contact']);
+  const BATCH_CLASSES = ['.hl-cell', '.service-card', '.timeline-item'];
+
+  function isHandledSpecially(el) {
+    if (HERO_IDS.has(el.id)) return true;
+    return BATCH_CLASSES.some(sel => el.matches(sel));
+  }
+
+  // Kill CSS transitions on .reveal elements so GSAP controls properties cleanly
+  document.querySelectorAll('.reveal').forEach(el => { el.style.transition = 'none'; });
+  document.querySelectorAll('.skill-fill').forEach(b => { b.style.transition = 'none'; });
+
+  // Pre-set sub-elements that live INSIDE .reveal parents to their "from" state,
+  // so they stay invisible when the parent card fades in and only appear on their own trigger.
+  gsap.set('.kol-item',      { opacity: 0, x: -18 });
+  gsap.set('.edu-item',      { opacity: 0, x: 18 });
+  gsap.set('.tech-ball-wrap',{ opacity: 0, scale: 0.3 });
+  gsap.set('.cs-gallery-item', { clipPath: 'inset(0% 100% 0% 0%)' });
+
+  // ── 1. Hero bento entrance — fires after intro loader (~1800ms) ──
+  gsap.set('#card-identity', { opacity: 0, x: -32 });
+  gsap.set('#card-avatar',   { opacity: 0, scale: 0.86 });
+  gsap.set('#card-stats',    { opacity: 0, y: 28 });
+  gsap.set('#card-contact',  { opacity: 0, x: 32 });
+
+  setTimeout(() => {
+    gsap.timeline({ defaults: { ease: 'power3.out' } })
+      .to('#card-identity', { opacity: 1, x: 0, duration: 0.75 })
+      .to('#card-avatar',   { opacity: 1, scale: 1, duration: 0.7, ease: 'back.out(1.2)' }, '-=0.5')
+      .to('#card-stats',    { opacity: 1, y: 0, duration: 0.65 }, '-=0.45')
+      .to('#card-contact',  { opacity: 1, x: 0, duration: 0.65 }, '-=0.5');
+  }, 2050);
+
+  // ── Hero parallax — subtle depth on scroll ──
+  const heroParallax = [
+    { sel: '#card-identity', y: -28 },
+    { sel: '#card-avatar',   y: -16 },
+    { sel: '#card-stats',    y: -10 },
+    { sel: '#card-contact',  y: -8  },
+  ];
+  heroParallax.forEach(({ sel, y }) => {
+    gsap.to(sel, {
+      y, ease: 'none',
+      scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 2 },
+    });
+  });
+
+  // ── 2. General reveal: every .reveal not handled by a specific animation ──
+  gsap.utils.toArray('.reveal').forEach(el => {
+    if (isHandledSpecially(el)) return;
+    gsap.fromTo(el,
+      { opacity: 0, y: 22 },
+      {
+        opacity: 1, y: 0,
+        duration: 0.65,
+        ease: 'power2.out',
+        scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+      }
+    );
+  });
+
+  // ── 3. Career highlights: scale + stagger pop-in ──
+  ScrollTrigger.batch('.hl-cell', {
+    onEnter: batch => gsap.fromTo(batch,
+      { opacity: 0, y: 26, scale: 0.93 },
+      { opacity: 1, y: 0, scale: 1, stagger: 0.07, duration: 0.5, ease: 'power2.out' }
+    ),
+    start: 'top 88%',
+    once: true,
+  });
+
+  // ── 4. Service cards: stagger slide-up ──
+  ScrollTrigger.batch('.service-card', {
+    onEnter: batch => gsap.fromTo(batch,
+      { opacity: 0, y: 36 },
+      { opacity: 1, y: 0, stagger: 0.14, duration: 0.7, ease: 'power2.out' }
+    ),
+    start: 'top 88%',
+    once: true,
+  });
+
+  // ── 5. Timeline items: slide from left ──
+  gsap.utils.toArray('.timeline-item').forEach(item => {
+    gsap.fromTo(item,
+      { opacity: 0, x: -36 },
+      {
+        opacity: 1, x: 0, duration: 0.65, ease: 'power2.out',
+        scrollTrigger: { trigger: item, start: 'top 86%', once: true },
+      }
+    );
+  });
+
+  // ── 6. Skill bars: smooth GSAP width animation ──
+  ScrollTrigger.create({
+    trigger: '#card-skills',
+    start: 'top 80%',
+    once: true,
+    onEnter() {
+      document.querySelectorAll('#card-skills .skill-fill').forEach((bar, i) => {
+        gsap.fromTo(bar,
+          { width: 0 },
+          { width: bar.dataset.width + '%', duration: 1.3, delay: 0.1 + i * 0.1, ease: 'power2.out' }
+        );
+      });
+    },
+  });
+
+  // ── 7. Tech balls: scale pop-in with stagger ──
+  ScrollTrigger.create({
+    trigger: '.tech-section-bg',
+    start: 'top 82%',
+    once: true,
+    onEnter() {
+      gsap.fromTo('.tech-ball-wrap',
+        { scale: 0.3, opacity: 0 },
+        { scale: 1, opacity: 1, stagger: { amount: 0.85, from: 'start' }, duration: 0.45, ease: 'back.out(1.8)' }
+      );
+    },
+  });
+
+  // ── 8. KOL items: slide from left ──
+  ScrollTrigger.batch('.kol-item', {
+    onEnter: batch => gsap.fromTo(batch,
+      { opacity: 0, x: -18 },
+      { opacity: 1, x: 0, stagger: 0.09, duration: 0.4, ease: 'power2.out' }
+    ),
+    start: 'top 88%',
+    once: true,
+  });
+
+  // ── 9. Education items: slide from right ──
+  ScrollTrigger.batch('.edu-item', {
+    onEnter: batch => gsap.fromTo(batch,
+      { opacity: 0, x: 18 },
+      { opacity: 1, x: 0, stagger: 0.09, duration: 0.4, ease: 'power2.out' }
+    ),
+    start: 'top 88%',
+    once: true,
+  });
+
+  // ── 10. Clip-path reveal — gallery images sweep from right ──
+  gsap.utils.toArray('.cs-gallery-item').forEach((item, i) => {
+    gsap.to(item, {
+      clipPath: 'inset(0% 0% 0% 0%)',
+      duration: 0.8,
+      ease: 'power3.out',
+      delay: (i % 2) * 0.14,
+      scrollTrigger: { trigger: item, start: 'top 84%', once: true },
+    });
+  });
+
+  // ── Video slots: stagger fade-up entrance ──
+  ScrollTrigger.batch('.video-slot', {
+    onEnter: batch => gsap.from(batch, {
+      opacity: 0, y: 24, stagger: 0.1, duration: 0.6, ease: 'power2.out',
+    }),
+    start: 'top 86%',
+    once: true,
+  });
+
+  // ── Horizontal video drag-scroll (CSS-based, no pin) ──
+  const videoGrid = document.querySelector('.video-showcase-grid');
+  if (videoGrid) {
+    let isDragging = false, startX = 0, scrollStart = 0;
+    videoGrid.addEventListener('mousedown', e => {
+      isDragging = true; startX = e.pageX; scrollStart = videoGrid.scrollLeft;
+      videoGrid.style.cursor = 'grabbing'; videoGrid.style.userSelect = 'none';
+    });
+    document.addEventListener('mouseup', () => {
+      isDragging = false; videoGrid.style.cursor = 'grab'; videoGrid.style.userSelect = '';
+    });
+    document.addEventListener('mousemove', e => {
+      if (!isDragging) return;
+      const dx = e.pageX - startX;
+      videoGrid.scrollLeft = scrollStart - dx * 1.4;
+    });
+  }
+
+  // ── 10. Parallax orbs: ScrollTrigger scrub (replaces scroll listener) ──
+  if (document.querySelector('.orb1')) {
+    gsap.to('.orb1', { y: 120, ease: 'none', scrollTrigger: { scrub: 1.2 } });
+    gsap.to('.orb2', { y: -80, ease: 'none', scrollTrigger: { scrub: 1.5 } });
+    gsap.to('.orb3', { y: 60,  ease: 'none', scrollTrigger: { scrub: 1.0 } });
+  }
+
+  // ── Reduced motion: skip all GSAP ──
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    ScrollTrigger.getAll().forEach(t => t.kill());
+    gsap.globalTimeline.clear();
+    document.querySelectorAll('.reveal').forEach(el => {
+      gsap.set(el, { clearProps: 'all' });
+      el.style.transition = '';
+    });
+    HERO_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) gsap.set(el, { clearProps: 'all' });
+    });
+    gsap.set('.cs-gallery-item', { clearProps: 'clipPath' });
+  }
+})();
+
 // ===== ANALYTICS — PAGE VIEW + SECTION TRACKING =====
 (function() {
   // Page view on load
@@ -501,3 +736,35 @@ function apiPost(path, body) {
     });
   });
 })();
+
+// ===== VIDEO MODAL LOGIC =====
+window.openVideoModal = function(videoUrl) {
+  const modal = document.getElementById('video-modal');
+  const iframe = document.getElementById('video-iframe');
+  if(modal && iframe) {
+    // Add autoplay param safely
+    const separator = videoUrl.includes('?') ? '&' : '?';
+    iframe.src = videoUrl + separator + 'autoplay=1';
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+};
+
+window.closeVideoModal = function() {
+  const modal = document.getElementById('video-modal');
+  const iframe = document.getElementById('video-iframe');
+  if(modal && iframe) {
+    iframe.src = '';
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+};
+
+document.addEventListener('click', (e) => {
+  const modal = document.getElementById('video-modal');
+  if(modal && modal.classList.contains('active')) {
+    if(e.target === modal) {
+      closeVideoModal();
+    }
+  }
+});
