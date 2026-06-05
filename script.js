@@ -208,24 +208,43 @@ if (skillsContainer && typeof TagCloud !== 'undefined') {
         'Luxury', 'Analytics', 'MBA', 'Strategy', 'Content'
     ];
     TagCloud(skillsContainer, mySkills, {
-        radius: 130, maxSpeed: 'fast', initSpeed: 'normal', direction: 225, keep: true
+        radius: 130, maxSpeed: 'normal', initSpeed: 'slow', direction: 225, keep: true
     });
 }
 
 // ===== PROJECT ACCORDION =====
 let _projTimer = null;
-window.activateProject = function(el) {
+window.activateProject = function(el, isClick = false) {
     if (el.classList.contains('active')) return;
     clearTimeout(_projTimer);
-    _projTimer = setTimeout(() => {
+    if (isClick) {
         document.querySelectorAll('.proj-acc-item').forEach(item => item.classList.remove('active'));
         el.classList.add('active');
-    }, 160);
+    } else {
+        _projTimer = setTimeout(() => {
+            document.querySelectorAll('.proj-acc-item').forEach(item => item.classList.remove('active'));
+            el.classList.add('active');
+        }, 350); // Reduced sensitivity for hover
+    }
 };
 // Cancel pending expand if mouse leaves the whole accordion
 document.addEventListener('DOMContentLoaded', () => {
     const acc = document.querySelector('.projects-accordion');
     if (acc) acc.addEventListener('mouseleave', () => clearTimeout(_projTimer));
+    
+    // Mobile: auto-activate accordion items on scroll
+    const accItems = document.querySelectorAll('.proj-acc-item');
+    if (accItems.length) {
+        const mobObserver = new IntersectionObserver((entries) => {
+            if (window.innerWidth > 900) return; // Only apply on mobile
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    activateProject(e.target, true);
+                }
+            });
+        }, { threshold: 0.5, rootMargin: "-15% 0px -15% 0px" });
+        accItems.forEach(item => mobObserver.observe(item));
+    }
 });
 
 // ===== MAGNETIC EFFECT (service cards) =====

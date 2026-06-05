@@ -236,12 +236,13 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
 }
 .proj-acc-item:hover{
   flex: 0 0 105px;
-  border-color: rgba(201,169,110,0.25);
+  border-color: rgba(201,169,110,0.6);
+  box-shadow: 0 0 25px rgba(201,169,110,0.3);
 }
 .proj-acc-item.active{
   flex:1 1 0;min-width:0;
-  border-color: rgba(201,169,110,0.4);
-  box-shadow: 0 10px 40px rgba(0,0,0,0.6), 0 0 30px rgba(201,169,110,0.15);
+  border-color: rgba(201,169,110,0.9);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6), 0 0 45px rgba(201,169,110,0.4);
 }
 .proj-acc-bg{
   position:absolute;inset:0;background-size:cover;background-position:center;
