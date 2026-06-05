@@ -264,44 +264,6 @@ document.querySelectorAll('.service-card .svc-icon, .nav-cta, .footer-btn').forE
 
 
 
-// ===== NAME DECODE EFFECT =====
-(function() {
-  const POOL = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&?!*';
-  const ORIG = ['T','H','Ị','N','H'];
-
-  function runDecode(spans) {
-    let frame = 0;
-    const TOTAL = 22;
-    let id = setInterval(() => {
-      spans.forEach((s, i) => {
-        const resolveAt = TOTAL - (ORIG.length - 1 - i) * 3;
-        s.textContent = (frame >= resolveAt)
-          ? ORIG[i]
-          : POOL[Math.floor(Math.random() * POOL.length)];
-      });
-      if (++frame > TOTAL + 2) clearInterval(id);
-    }, 40);
-  }
-
-  document.fonts.ready.then(() => {
-    const h1 = document.querySelector('.name-main');
-    if (!h1) return;
-    const spans = h1.querySelectorAll('.sc-char');
-    if (!spans.length) return;
-
-    // Lock each span to its natural rendered width so random chars never shift layout
-    spans.forEach(s => {
-      const w = s.getBoundingClientRect().width;
-      if (w > 0) s.style.width = w + 'px';
-    });
-
-    // Decode on initial load (after intro fades at ~1800ms)
-    setTimeout(() => runDecode(spans), 2200);
-
-    // Re-trigger on hover
-    h1.addEventListener('mouseenter', () => runDecode(spans));
-  });
-})();
 
 // ===== PARALLAX ORBS (CSS fallback — GSAP ScrollTrigger scrub overrides when available) =====
 if (typeof gsap === 'undefined') {
