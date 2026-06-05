@@ -660,7 +660,7 @@ function apiPost(path, body) {
   // ── Video slots: stagger fade-up entrance ──
   ScrollTrigger.batch('.video-slot', {
     onEnter: batch => gsap.from(batch, {
-      opacity: 0, y: 24, stagger: 0.1, duration: 0.6, ease: 'power2.out',
+      opacity: 0, y: 24, stagger: 0.1, duration: 0.6, ease: 'power2.out', clearProps: 'all'
     }),
     start: 'top 86%',
     once: true,
