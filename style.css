@@ -610,7 +610,7 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
 /* ===================================================
    VIDEO SHOWCASE
    =================================================== */
-.video-showcase-grid{display:flex;align-items:center;flex-wrap:nowrap;gap:12px;margin-top:4px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;cursor:grab}.video-showcase-grid::-webkit-scrollbar{display:none}
+.video-showcase-grid{display:flex;align-items:stretch;flex-wrap:nowrap;gap:12px;margin-top:4px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;cursor:grab;touch-action:pan-x}.video-showcase-grid::-webkit-scrollbar{display:none}
 .video-slot{
   position:relative;border-radius:12px;
   width:260px;height:162px;flex:0 0 260px;overflow:hidden;scroll-snap-align:start;
