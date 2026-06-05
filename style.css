@@ -88,7 +88,7 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(201,169,110,.4)}50%{box-shadow:0 0 0 7px rgba(201,169,110,0)}}
 
 .name-label{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:.35em;color:var(--muted);margin-bottom:4px}
-.name-main{font-family:'Syne',sans-serif;font-size:clamp(60px,9vw,96px);font-weight:800;line-height:.9;letter-spacing:-.02em;background:linear-gradient(140deg,#fff 20%,var(--gold) 60%,var(--bronze) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:20px;white-space:nowrap;cursor:default;animation:nameReveal 1.1s cubic-bezier(0.16,1,0.3,1) 2.1s both;transition:filter .4s ease}
+.name-main{font-family:'Be Vietnam Pro','Poppins',sans-serif;font-size:clamp(60px,9vw,96px);font-weight:800;line-height:.9;letter-spacing:-.02em;background:linear-gradient(140deg,#fff 20%,var(--gold) 60%,var(--bronze) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:20px;white-space:nowrap;cursor:default;animation:nameReveal 1.1s cubic-bezier(0.16,1,0.3,1) 2.1s both;transition:filter .4s ease}
 .name-main:hover{filter:brightness(1.25) drop-shadow(0 0 18px rgba(201,169,110,.35))}
 @keyframes nameReveal{0%{letter-spacing:.28em;filter:blur(5px);opacity:0}100%{letter-spacing:-.02em;filter:blur(0);opacity:1}}
 
@@ -727,6 +727,16 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
   padding:3px 8px;font-size:9px;font-weight:700;letter-spacing:.05em;
   backdrop-filter:blur(6px);
 }
+
+/* Video showcase navigation */
+.vs-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.vs-nav{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.vs-btn{width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.7);cursor:pointer;font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center;transition:all 0.22s ease;padding:0;font-family:'Poppins',sans-serif;flex-shrink:0}
+.vs-btn:hover:not(:disabled){background:rgba(201,169,110,0.18);border-color:rgba(201,169,110,0.5);color:var(--gold)}
+.vs-btn:disabled{opacity:0.25;cursor:not-allowed}
+.vs-dots{display:flex;gap:5px;align-items:center}
+.vs-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.2);transition:all 0.3s ease;cursor:pointer}
+.vs-dot.active{background:var(--gold);width:18px;border-radius:3px}
 
 /* ===================================================
    CONTACT BENTO
