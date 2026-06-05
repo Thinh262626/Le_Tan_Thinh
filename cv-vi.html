@@ -25,12 +25,49 @@
         }
 
         .cv-container {
-            width: 800px;
+            width: 100%;
+            max-width: 800px;
             margin: 0 auto;
             background: var(--bg-color);
             padding: 50px 60px;
             box-sizing: border-box;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        @media (max-width: 768px) {
+            .cv-container {
+                padding: 30px 20px;
+            }
+            header {
+                padding-bottom: 15px;
+                margin-bottom: 20px;
+            }
+            h1 {
+                font-size: 28px;
+            }
+            .subtitle {
+                font-size: 14px;
+            }
+            .personal-details {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+                text-align: center;
+            }
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            .item-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .item-date {
+                margin-top: 5px;
+            }
+            .avatar {
+                width: 120px;
+                height: 120px;
+            }
         }
 
         header {
