@@ -148,7 +148,7 @@
     <div class="card card-identity reveal" id="card-identity">
       <div class="badge-available"><span class="dot-pulse"></span><span data-en="Open to new opportunities">Sẵn sàng cơ hội mới</span></div>
       <p class="name-label">LÊ TẦN</p>
-      <h1 class="name-main">THỊNH</h1>
+      <h1 class="name-main"><span class="sc-char">T</span><span class="sc-char">H</span><span class="sc-char">Ị</span><span class="sc-char">N</span><span class="sc-char">H</span></h1>
       <p class="hero-typewriter"><span id="typewriter-role"></span><span class="tw-cursor">|</span></p>
       <div class="title-chips">
         <span class="chip">Marketing</span>
@@ -401,8 +401,20 @@
     </div>
 
     <div class="card card-videos reveal" id="card-videos">
-      <p class="card-label">VIDEO SHOWCASE</p>
-      <div class="video-showcase-grid">
+      <div class="vs-header">
+        <p class="card-label" style="margin:0">VIDEO SHOWCASE</p>
+        <div class="vs-nav">
+          <button class="vs-btn" id="vs-prev" aria-label="Previous" disabled>&#8249;</button>
+          <div class="vs-dots">
+            <span class="vs-dot active" data-idx="0"></span>
+            <span class="vs-dot" data-idx="1"></span>
+            <span class="vs-dot" data-idx="2"></span>
+            <span class="vs-dot" data-idx="3"></span>
+          </div>
+          <button class="vs-btn" id="vs-next" aria-label="Next">&#8250;</button>
+        </div>
+      </div>
+      <div class="video-showcase-grid" id="vs-grid">
 
         <!-- SLOT 1 — Vũ Trụ Cò Bay -->
         <a class="video-slot vs-purple" href="https://www.youtube.com/watch?v=NXy3whhG7Sk" target="_blank" rel="noopener" aria-label="Vũ Trụ Cò Bay">

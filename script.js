@@ -231,6 +231,34 @@ window.activateProject = function(el, isClick = false) {
 document.addEventListener('DOMContentLoaded', () => {
     const acc = document.querySelector('.projects-accordion');
     if (acc) acc.addEventListener('mouseleave', () => clearTimeout(_projTimer));
+
+    // ===== VIDEO SHOWCASE SLIDER =====
+    const vsGrid  = document.getElementById('vs-grid');
+    const vsPrev  = document.getElementById('vs-prev');
+    const vsNext  = document.getElementById('vs-next');
+    const vsDots  = document.querySelectorAll('.vs-dot');
+    if (vsGrid && vsPrev && vsNext) {
+        const SLOT_W = 272; // 260px slot + 12px gap
+        const TOTAL  = 4;
+        let idx = 0;
+
+        function vsGoTo(i) {
+            idx = Math.max(0, Math.min(i, TOTAL - 1));
+            vsGrid.scrollTo({ left: idx * SLOT_W, behavior: 'smooth' });
+            vsDots.forEach((d, j) => d.classList.toggle('active', j === idx));
+            vsPrev.disabled = idx === 0;
+            vsNext.disabled = idx === TOTAL - 1;
+        }
+
+        vsPrev.addEventListener('click', () => vsGoTo(idx - 1));
+        vsNext.addEventListener('click', () => vsGoTo(idx + 1));
+        vsDots.forEach(d => d.addEventListener('click', () => vsGoTo(+d.dataset.idx)));
+
+        vsGrid.addEventListener('scroll', () => {
+            const i = Math.round(vsGrid.scrollLeft / SLOT_W);
+            if (i !== idx) { idx = i; vsDots.forEach((d, j) => d.classList.toggle('active', j === idx)); vsPrev.disabled = idx === 0; vsNext.disabled = idx === TOTAL - 1; }
+        }, { passive: true });
+    }
     
     // Mobile: auto-activate accordion items on scroll
     const accItems = document.querySelectorAll('.proj-acc-item');
@@ -245,6 +273,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { threshold: 0.5, rootMargin: "-15% 0px -15% 0px" });
         accItems.forEach(item => mobObserver.observe(item));
     }
+});
+
+// ===== NAME WIDTH LOCK (prevent Syne/Vietnamese fallback from clipping last char) =====
+document.fonts.ready.then(() => {
+  document.querySelectorAll('.name-main .sc-char').forEach(s => {
+    const w = s.getBoundingClientRect().width;
+    if (w > 0) s.style.width = w + 'px';
+  });
 });
 
 // ===== MAGNETIC EFFECT (service cards) =====
