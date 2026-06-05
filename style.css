@@ -237,13 +237,13 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
 }
 .proj-acc-item:hover{
   flex: 0 0 105px;
-  border-color: rgba(201,169,110,0.6);
-  box-shadow: 0 0 25px rgba(201,169,110,0.3);
+  border-color: rgba(201,169,110,0.8);
+  box-shadow: 0 0 35px rgba(201,169,110,0.45);
 }
 .proj-acc-item.active{
   flex:1 1 0;min-width:0;
-  border-color: rgba(201,169,110,0.9);
-  box-shadow: 0 10px 40px rgba(0,0,0,0.6), 0 0 45px rgba(201,169,110,0.4);
+  border-color: rgba(201,169,110,1);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.7), 0 0 65px rgba(201,169,110,0.6);
 }
 .proj-acc-bg{
   position:absolute;inset:0;background-size:cover;background-position:center;
@@ -262,10 +262,14 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
 .proj-acc-item::after{
   content:'';position:absolute;inset:0;z-index:2;
   background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.85) 100%);
-  transition:background 0.5s ease;
+  transition:background 0.5s ease, backdrop-filter 0.5s ease;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
 }
 .proj-acc-item.active::after{
   background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.75) 100%);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
 }
 .proj-acc-vertical{
   position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
@@ -662,10 +666,10 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
 /* ===================================================
    VIDEO SHOWCASE
    =================================================== */
-.video-showcase-grid{display:flex;align-items:flex-start;flex-wrap:nowrap;gap:12px;margin-top:4px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;cursor:grab;touch-action:pan-x}.video-showcase-grid::-webkit-scrollbar{display:none}
+.video-showcase-grid{display:flex;align-items:stretch;flex-wrap:nowrap;gap:12px;margin-top:0;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;touch-action:pan-x}.video-showcase-grid::-webkit-scrollbar{display:none}
 .video-slot{
   position:relative;border-radius:12px;
-  width:260px;height:160px;flex:0 0 260px;overflow:hidden;scroll-snap-align:start;
+  width:260px;height:172px;flex:0 0 260px;overflow:hidden;scroll-snap-align:start;
   display:block;
   text-decoration:none;cursor:pointer;
   transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s;
