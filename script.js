@@ -189,7 +189,7 @@ document.querySelectorAll('.stats-grid').forEach(el => sro.observe(el));
 // ===== CARD TILT (VanillaTilt) — desktop only =====
 const isTouch = window.matchMedia('(pointer:coarse)').matches;
 if (typeof VanillaTilt !== 'undefined' && !isTouch) {
-  VanillaTilt.init(document.querySelectorAll(".card"), {
+  VanillaTilt.init(document.querySelectorAll(".card, .vf-product-card"), {
       max: 3,
       speed: 700,
       glare: true,
